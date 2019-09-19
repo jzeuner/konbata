@@ -1,22 +1,7 @@
 import format
 import csv
 
-from Data import DataNode, DataTree
-
-# CSV
-def csv_loader(file, delimiter):
-    if delimiter not in TYPES['.csv'].delimiters:
-        # TODO raise error unknown delemiter
-        pass
-    content = csv.reader(file, delimiter=delimiter)
-    return "".join([delimiter.join(row)+'\n' for row in content])
-
-
-def csv_parser(data, delimiter):
-    if delimiter not in TYPES['.csv'].delimiters:
-        # TODO raise error unknown delemiter
-        pass
-    return data # data is storred in csv format therefore dont need to be parsed
+from data import DataNode, DataTree
 
 #===============================================================================
 # Per data type there have to be two functions

@@ -1,8 +1,9 @@
 """
 Internal Data structure
 
-Basically a tree
+Basically a tree.
 """
+
 class DataNode:
 
 	def __init__(self, value, tag=None, children=None, attribute=None):

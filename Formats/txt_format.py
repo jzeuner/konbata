@@ -4,3 +4,5 @@ def txt_loader(file):
 
 def txt_parser(data):
     pass
+
+# Idea: Every Row is a node ?
