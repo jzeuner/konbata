@@ -1,7 +1,6 @@
-import format
 import csv
 
-from data import DataNode, DataTree
+from Data.Data import DataNode, DataTree
 
 #===============================================================================
 # Per data type there have to be two functions

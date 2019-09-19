@@ -12,7 +12,7 @@
 import argparse
 import sys
 import os
-from formats.format import Format, getFormats
+from Formats.format import Format, getFormats
 
 DEBUG = False # Set True to activate debug mode
 

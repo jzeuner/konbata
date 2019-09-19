@@ -1,10 +1,10 @@
-from csv_format import csv_loader, csv_parser
-from txt_format import txt_loader, txt_parser
+from .csv_format import csv_toTree, csv_fromTree
+from .txt_format import txt_loader, txt_parser
 
 # Supported File Formats
 
-TYPES = {'.csv': ('csv', [';', ','], loader= csv_loader, parser=csv_parser),
-         '.txt': ('txt', [';', ','], loader=txt_loader, parser=txt_parser)}
+TYPES = {'.csv': ('csv', [';', ','], csv_toTree, csv_fromTree),
+         '.txt': ('txt', [';', ','], txt_loader, txt_parser)}
 
 class Format:
     """
@@ -100,4 +100,4 @@ def getFormats(type_names=[]):
 
     checkTypes(type_names)
 
-    return [Format(TYPES[type_name]) for type_name in type_names]
+    return [Format(*TYPES[type_name]) for type_name in type_names]
