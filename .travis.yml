@@ -6,4 +6,4 @@ python:
 # - pip install -r requirements.txt
 # Dont use that yet
 script:
-  - unittest Tests/test_basic.py
+  - python -m unittest Tests/test_basic.py
