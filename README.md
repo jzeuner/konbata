@@ -22,7 +22,7 @@ Just a list of some file formats:
 xml, csv, json, html, txt, ...
 
 # License
-To be added.
+[MIT License](https://github.com/jzeuner/konbata/blob/master/LICENSE)
 
 # Documentation
 To be added.
