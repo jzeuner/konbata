@@ -126,6 +126,7 @@ class TestDataTree(unittest.TestCase):
         """
         Test height function of DataTree.
         """
+
         t1 = DataTree()
 
         self.assertEqual(t1.height(), 1)
@@ -146,8 +147,72 @@ class TestDataTree(unittest.TestCase):
 
 
 class TestFormats(unittest.TestCase):
-    # format
-    pass
+
+    def test_fail_checkFormats(self):
+        """
+        Test if error got raised for not supported or empty type name.
+        """
+
+        self.assertRaises(TypeError, checkTypes([]))
+        self.assertRaises(TypeError, checkTypes(['qqr']))
+        self.assertRaises(TypeError, checkTypes(['qqr', 'https']))
+
+
+    def test_checkFormats(self):
+        """
+        Test supported types.
+        """
+
+        try:
+            checkTypes(['csv'])
+            checkTypes(['txt'])
+            checkTypes(['csv', 'txt'])
+        except TypeError:
+            self.fail()
+
+
+    def test_fail_getFormats(self):
+        """
+        Test the getFormats function with not supported types.
+        """
+
+        self.assertRaises(TypeError, getFormats([]))
+        self.assertRaises(TypeError, getFormats(['qqr']))
+        self.assertRaises(TypeError, getFormats(['qqr', 'https']))
+
+
+    def test_getFormats(self):
+        """
+        Test the getFormats function with supported types.
+        """
+        result = getFormats(['txt', 'csv'])
+
+        self.assertEqual(type(result), type([]))
+        self.assertEqual(len(result), 2)
+
+        for r in result:
+            self.assertIsNotNone(r.loader)
+            self.assertIsNotNone(r.parser)
+
+
+    def test_Format(self):
+        """
+        Test wrong use of Format creation and one creation with two functions.
+        """
+
+        self.assertRaises(Exception, Format('Fail'), 'parser and loader are needed')
+        self.assertRaises(Exception, Format('Fail', loader='loader', parser='parser'), 'parser and loader cant be strings')
+
+        def test1():
+            pass
+
+        def test2():
+            pass
+
+        result = Format('test_format', test1, test2)
+        self.assertIsNotNone(result.loader)
+        self.assertIsNotNone(result.parser)
+
 
 class TestCsvFormat(unittest.TestCase):
     # csv_format TODO
