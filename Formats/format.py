@@ -42,7 +42,7 @@ class Format:
 
         Parameters
         ----------
-        file: str
+        file: file
         delimiter: list, optional
 
         Returns
@@ -56,21 +56,22 @@ class Format:
         return self.loader(file, self.delimiters[0])
 
 
-    def parse(self, content, delimiter=None):
+    def parse(self, content, file, delimiter=None):
         """
         Uses the parser function to parse the internal data structure into the format.
 
         Parameters
         ----------
         content: DataTree
+        file: file
         delimiter: list, optional
 
         """
 
         if delimiter != None:
-            return self.parser(content, delimiter)
+            self.parser(content, file, delimiter)
 
-        return self.parser(content, self.delimiters[0])
+        self.parser(content, file, self.delimiters[0])
 
 
 def checkTypes(type_names=[]):

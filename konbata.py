@@ -45,7 +45,7 @@ class Konbata:
         self.delimiter = delimiter
         self.options = options
 
-        self.output = None
+        self.content = None
 
 
     def format(self, input_path, output_path, delimiter=None):
@@ -69,15 +69,23 @@ class Konbata:
             raise OSError('No such file: %s' % input_filename)
             exit()
 
-        file = open(input_filename, 'r')
-        content = self.input_type.load(file, delimiter)
-        file.close()
-        self.output = self.output_type.parse(content, delimiter)
+        output_filename = output_path + '.' + self.output_type.name
+
+        # TODO: Catch errors
+        input_file = open(input_filename, 'r')
+
+        self.content = self.input_type.load(file, delimiter)
+        input_file.close()
+
+        output_file = open(output_filename, 'w')
+
+        self.output_type.parse(self.content, output_file, delimiter)
+        output_file.close()
 
 
-    def save(self, file_path):
+    def save(self, file_path, file_type):
         """
-        Saves the Konbata output variable as file to file_path.
+        Saves the previous formatted internal content to the additional file file_path.
 
         Warning: The function also overrides the output file!
 
@@ -87,14 +95,20 @@ class Konbata:
             Complete path to the output file
         """
 
-        if self.output == None:
-            raise Exception("Kanoban self.output is not set -> save(...) function exit.")
+        if self.content == None:
+            raise Exception("Content cannot be empty, call format before.")
             exit()
 
         # TODO: Right now, the function also overrides file. May think of a good solution.
-        file = open(file_path, 'w+')
-        file.write(self.output)
-        file.close()
+
+        output_filename = file_path + '.' + file_type
+
+        output_file = open(output_filename, 'w')
+
+        format = getFormats([file_type])[0]
+        format.parse(self.content, output_file)
+
+        output_file.close()
 
 
     def show(self):
@@ -102,7 +116,7 @@ class Konbata:
         TODO
         """
         # TODO: Think of a good way to transform the internal structure into string
-        print(self.output)
+        print(self.content)
 
 
     def get(self):
@@ -110,10 +124,10 @@ class Konbata:
         TODO
         """
         # TODO: Extend this function in a usefull way
-        return self.output
+        return self.content
 
 
-def konbata(input_filename, output_filename, m_save=True, m_show=False,
+def konbata(input_filename, output_filename, m_save=False, m_save_filename=None, m_show=False,
             m_get=False, delimiter=None, options=None):
     """
     konbata: transforms the input_file into the output_file
@@ -127,13 +141,15 @@ def konbata(input_filename, output_filename, m_save=True, m_show=False,
     output_filename: str
         Complete path of the output file
     m_save: bool
-        If True: Saves the Output in a File
-        Default: True
+        If True: Saves the content in the additional file m_save_filename
+        Default: False
+    m_save_filename: str
+        Writes the content into the file m_save_filename if m_save is true
     m_show: bool
-        If True: Represents the Output as a String in the Terminal
+        If True: Represents the content as a String in the Terminal
         Default: False
     m_get: bool
-        If True: Returns the data as internal Data Structure
+        If True: Returns the content as internal Data Structure
     delimiter: str, optional
         TODO: add
     options: list, optional
@@ -143,12 +159,14 @@ def konbata(input_filename, output_filename, m_save=True, m_show=False,
     (input_path, input_type) = os.path.splitext(input_filename)
     (output_path, output_type) = os.path.splitext(output_filename)
 
-    c = Konbata(input_type, output_type, options)
-    c.format(input_path, output_path, delimiter)
+    k = Konbata(input_type, output_type, options)
+    k.format(input_path, output_path, delimiter)
 
-    if m_save: c.save(output_path + output_type)
-    if m_show: c.show()
-    if m_get: return c.get()
+    if m_save:
+        (additional_output_path, additional_output_type) = os.path.splitext(m_save_filename)
+        k.save(additional_output_path, additional_output_type)
+    if m_show: k.show()
+    if m_get: return k.get()
 
 
 if __name__ == '__main__':
@@ -162,6 +180,7 @@ if __name__ == '__main__':
     parser.add_argument("output_file", type=str, help="Path of output file")
 
     # Modes of the kanoban function
+    # TODO add an additional file to save to
     parser.add_argument("-sa", "--save", action="store_true",
                         help="Store output file")
     parser.add_argument("-sh", "--show", action="store_true",
