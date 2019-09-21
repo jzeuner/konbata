@@ -153,9 +153,8 @@ class TestFormats(unittest.TestCase):
         Test if error got raised for not supported or empty type name.
         """
 
-        self.assertRaises(TypeError, checkTypes([]))
-        self.assertRaises(TypeError, checkTypes(['qqr']))
-        self.assertRaises(TypeError, checkTypes(['qqr', 'https']))
+        self.assertRaises(TypeError, lambda:checkTypes(['.qqr']))
+        self.assertRaises(TypeError, lambda:checkTypes(['.qqr', '.https']))
 
 
     def test_checkFormats(self):
@@ -164,9 +163,10 @@ class TestFormats(unittest.TestCase):
         """
 
         try:
-            checkTypes(['csv'])
-            checkTypes(['txt'])
-            checkTypes(['csv', 'txt'])
+            checkTypes([])
+            checkTypes(['.csv'])
+            checkTypes(['.txt'])
+            checkTypes(['.csv', '.txt'])
         except TypeError:
             self.fail()
 
@@ -176,16 +176,15 @@ class TestFormats(unittest.TestCase):
         Test the getFormats function with not supported types.
         """
 
-        self.assertRaises(TypeError, getFormats([]))
-        self.assertRaises(TypeError, getFormats(['qqr']))
-        self.assertRaises(TypeError, getFormats(['qqr', 'https']))
+        self.assertRaises(TypeError, lambda:getFormats(['.qqr']))
+        self.assertRaises(TypeError, lambda:getFormats(['.qqr', '.https']))
 
 
     def test_getFormats(self):
         """
         Test the getFormats function with supported types.
         """
-        result = getFormats(['txt', 'csv'])
+        result = getFormats(['.txt', '.csv'])
 
         self.assertEqual(type(result), type([]))
         self.assertEqual(len(result), 2)
@@ -209,7 +208,7 @@ class TestFormats(unittest.TestCase):
         def test2():
             pass
 
-        result = Format('test_format', test1, test2)
+        result = Format('test_format', loader=test1, parser=test2)
         self.assertIsNotNone(result.loader)
         self.assertIsNotNone(result.parser)
 

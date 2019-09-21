@@ -44,7 +44,11 @@ def csv_fromTree(tree, file, options=None):
 
 	if tree.type != 'csv' or tree.height() != 3:
 		# Height of tree needs to be flatten or need to be increased
-		pass
+		if tree.height > 3:
+			tree.minimize_height(tree.height-3)
+		else:
+			#TODO increase Height
+			pass
 
 	# Here we have a tree of the right shape
 	# TODO add option append
