@@ -1,7 +1,7 @@
 # <img alt="konbata" src="https://github.com/jzeuner/konbata_images/blob/master/logo.png">
-# konbata
+---
 [![Test Status](https://travis-ci.org/jzeuner/konbata.svg?branch=master)](https://travis-ci.org/jzeuner/konbata)
-
+---
 #### What is it?
 Konbata is a python libary, that allows you to covert a file.
 It transforms the input format into the output format, by using an internal data structure.
