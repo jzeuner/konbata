@@ -1,3 +1,4 @@
+# <img alt="konbata" src="https://github.com/jzeuner/konbata_images/blob/master/logo.svg" height="60">
 # konbata
 [![Test Status](https://travis-ci.org/jzeuner/konbata.svg?branch=master)](https://travis-ci.org/jzeuner/konbata)
 
