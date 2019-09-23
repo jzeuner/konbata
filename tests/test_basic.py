@@ -87,6 +87,27 @@ class TestDataNode(unittest.TestCase):
         self.assertEqual(t1.height(), 2)
 
 
+    def test_is_leaf_DataNode(self):
+        """
+        TODO
+        """
+        pass
+
+
+    def test_merge_DataNode(self):
+        """
+        TODO
+        """
+        pass
+
+
+    def test_minimize_height_DataNode(self):
+        """
+        TODO
+        """
+        pass
+
+
 class TestDataTree(unittest.TestCase):
 
     def test_root_DataTree(self):
@@ -144,6 +165,13 @@ class TestDataTree(unittest.TestCase):
         self.assertEqual(t1.height(), 4)
         t1.root.add(d4)
         self.assertEqual(t1.height(), 4)
+
+
+    def test_minimize_height_DataTree(self):
+        """
+        TODO
+        """
+        pass
 
 
 class TestFormats(unittest.TestCase):

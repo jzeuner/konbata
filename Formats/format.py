@@ -1,10 +1,10 @@
 from .csv_format import csv_toTree, csv_fromTree
-from .txt_format import txt_loader, txt_parser
+from .txt_format import txt_toTree, txt_fromTree
 
 # Supported File Formats
 
 TYPES = {'.csv': ('csv', [';', ','], csv_toTree, csv_fromTree),
-         '.txt': ('txt', [';', ','], txt_loader, txt_parser)}
+         '.txt': ('txt', [';', ','], txt_toTree, txt_fromTree)}
 
 class Format:
     """
@@ -70,8 +70,8 @@ class Format:
 
         if delimiter != None:
             self.parser(content, file, delimiter)
-
-        self.parser(content, file, self.delimiters[0])
+        else:
+            self.parser(content, file, self.delimiters[0])
 
 
 def checkTypes(type_names=[]):

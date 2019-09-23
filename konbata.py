@@ -14,7 +14,7 @@ import sys
 import os
 from Formats.format import Format, getFormats
 
-DEBUG = False # Set True to activate debug mode
+DEBUG = True # Set True to activate debug mode
 
 class Konbata:
     """
@@ -74,10 +74,10 @@ class Konbata:
         # TODO: Catch errors
         input_file = open(input_filename, 'r')
 
-        self.content = self.input_type.load(file, delimiter)
+        self.content = self.input_type.load(input_file, delimiter)
         input_file.close()
 
-        output_file = open(output_filename, 'w')
+        output_file = open(output_filename, 'w', newline='')
 
         self.output_type.parse(self.content, output_file, delimiter)
         output_file.close()
