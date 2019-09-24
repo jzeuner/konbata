@@ -47,7 +47,7 @@ class Format:
 
         Returns
         -------
-        DataTree
+        content: DataTree
         """
 
         if delimiter != None:
@@ -65,7 +65,6 @@ class Format:
         content: DataTree
         file: file
         delimiter: list, optional
-
         """
 
         if delimiter != None:
@@ -97,6 +96,11 @@ def getFormats(type_names=[]):
     Parameters
     ----------
     type_names: list
+
+    Returns
+    -------
+    types: list
+        list of Type Objects
     """
 
     checkTypes(type_names)

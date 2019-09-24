@@ -30,10 +30,14 @@ class Konbata:
 
         Parameters
         ----------
-        in_type:
-        out_type:
-        delimiter: , optional
+        in_type: str
+            .TYPE_NAME, e.g. .csv
+        out_type: str
+            .TYPE_NAME, e.g. .csv
+        delimiter: str, optional
+            Delimiter that should be used for encoding, e.g. ';'
         options: , optional
+            TODO
         """
 
         # Uses the Format class to get and check the data types of the files
@@ -42,6 +46,7 @@ class Konbata:
         self.input_type = formats[0]
         self.output_type = formats[1]
 
+        # TODO check for usefull types
         self.delimiter = delimiter
         self.options = options
 
@@ -57,9 +62,12 @@ class Konbata:
 
         Parameters
         ----------
-        input_path:
-        output_path:
-        delimiter: , optional
+        input_path: str
+            path to file without file type ending
+        output_path: str
+            path to file without file type ending
+        delimiter: str, optional
+            delimiter that should be used in output format
         """
 
         if DEBUG: print(self.input_type.name, self.output_type.name)
@@ -83,7 +91,7 @@ class Konbata:
         output_file.close()
 
 
-    def save(self, file_path, file_type):
+    def save(self, output_path, output_type):
         """
         Saves the previous formatted internal content to the additional file file_path.
 
@@ -91,8 +99,10 @@ class Konbata:
 
         Parameters
         ----------
-        file_path: str
+        output_path: str
             Complete path to the output file
+        output_type: str
+            .TYPE_NAME, e.g. .csv
         """
 
         if self.content == None:
@@ -101,30 +111,68 @@ class Konbata:
 
         # TODO: Right now, the function also overrides file. May think of a good solution.
 
-        output_filename = file_path + '.' + file_type
+        output_filename = output_path + '.' + output_type
 
         output_file = open(output_filename, 'w')
 
-        format = getFormats([file_type])[0]
+        format = getFormats([output_type])[0]
         format.parse(self.content, output_file)
 
         output_file.close()
 
 
-    def show(self):
+    def show(self, showInternalData=True, showInputData=False, showOutputData=False):
         """
-        TODO
+        Function to show the string representation of the data.
+
+        Parameters
+        ----------
+        showInternalData: bool, optional
+            Default: True, if true displays internal data as string
+        showInputData: bool, optional
+            Default: False, if true displays input data as string
+        showOutputData: bool, optional
+            Default: False, if true displays output data as string
         """
         # TODO: Think of a good way to transform the internal structure into string
-        print(self.content)
+        if showInternalData:
+            print(self.content)
+
+        if showInputData:
+            pass
+
+        if showOutputData:
+            pass
 
 
-    def get(self):
+    def get(self, getInternalData=True, getInputData=False, getOutputData=False):
         """
-        TODO
+        Function to get the representation of the data.
+
+        Parameters
+        ----------
+        getInternalData: bool, optional
+            Default: True, if true displays internal data as string
+        getInputData: bool, optional
+            Default: False, if true displays input data as string
+        getOutputData: bool, optional
+            Default: False, if true displays output data as string
+
+        Returns
+        ----------
+        content: DataTree | str
+            if internalData returns a DataTree or None if nothing formatted
+            else returns string of inout/output data
         """
         # TODO: Extend this function in a usefull way
-        return self.content
+        if getInternalData:
+            return self.content
+
+        if getInputData:
+            pass
+
+        if getInputData:
+            pass
 
 
 def konbata(input_filename, output_filename, m_save=False, m_save_filename=None, m_show=False,
@@ -195,7 +243,9 @@ if __name__ == '__main__':
                         help="Path of option file")
 
     args = parser.parse_args()
-    print(args)
+
+    if DEBUG: print(args)
+
     konbata(args.input_file, args.output_file,
             m_save=args.save, m_show=args.show, m_get=args.get,
             delimiter=args.delimiter, options=args.options)

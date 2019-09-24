@@ -89,6 +89,7 @@ class DataNode:
 		Returns
         -------
 		is_leaf: bool
+			True is returned, if node is a leaf. (False for inner nodes)
 		"""
 
 		return self.leaf
@@ -111,8 +112,16 @@ class DataNode:
 
 	def remove_children(self):
 		"""
-		TODO
+		Remove children of node and returns list of children.
+
+		Sets children attribute of the node back to None and sets leaf to True.
+
+		Returns
+        -------
+		children: list
+			If node has no children, None is returned.
 		"""
+		# TODO what if no children?
 
 		children = self.children
 
@@ -122,16 +131,19 @@ class DataNode:
 		return children
 
 
-	def minimize_height(self, tree_height, cur_height):
+	def minimize_height(self, tree_height=None, cur_height=1):
 		"""
 		Minimize the height of this Node structure by one.
 
 		Parameters
         ----------
-		tree_height: int
-		cur_height: int
+		tree_height: int, optional
+		cur_height: int, optional
 		"""
 
+		if tree_height == None:
+			tree_height = self.height()
+			
 		# Find merge children with node and remember
 		new_children = []
 

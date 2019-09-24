@@ -1,5 +1,5 @@
 # <img alt="konbata" src="https://github.com/jzeuner/konbata_images/blob/master/logo.png">
-[![Test Status](https://travis-ci.org/jzeuner/konbata.svg?branch=master)](https://travis-ci.org/jzeuner/konbata)
+Test Status: [![Test Status](https://travis-ci.org/jzeuner/konbata.svg?branch=master)](https://travis-ci.org/jzeuner/konbata)
 ---
 #### What is it?
 Konbata is a python libary, that allows you to covert a file.
