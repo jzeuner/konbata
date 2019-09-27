@@ -30,7 +30,7 @@ class TestDataNode(unittest.TestCase):
         Test a complex DataNode with all possible attributes
         """
 
-        data = (1, "tag", [DataNode('child')], 'attribute')
+        data = ('1', "tag", [DataNode('child')], 'attribute')
         result = DataNode(*data)
 
         self.assertEqual(result.data, data[0])
@@ -46,7 +46,7 @@ class TestDataNode(unittest.TestCase):
         Test a complex DataNode with all possible attributes
         """
 
-        data = (1, "tag", None, 'attribute')
+        data = ('1', "tag", None, 'attribute')
         result = DataNode(*data)
 
         self.assertEqual(result.data, data[0])
@@ -62,8 +62,8 @@ class TestDataNode(unittest.TestCase):
         Test add function of DataNode.
         """
 
-        t1 = DataNode(1)
-        t2 = DataNode(2, children=[DataNode(21)])
+        t1 = DataNode('1')
+        t2 = DataNode('2', children=[DataNode(21)])
 
         t1.add(DataNode(11))
         t1.add(DataNode(12))
@@ -118,8 +118,9 @@ class TestDataNode(unittest.TestCase):
 
         # Test it with t1 having children
         t1 = DataNode('t1')
+        t2 = DataNode('t2')
 
-        t1.add(DataNode('t2'))
+        t1.add(t2)
 
         self.assertEqual(t1.is_leaf(), False)
         self.assertEqual(t2.is_leaf(), True)

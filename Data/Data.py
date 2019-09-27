@@ -19,14 +19,15 @@ class DataNode:
 
 		Parameters
         ----------
-		value:
+		value: str?? TODO
 		tag: , optional
 		children: , optional
 		attribute: , optional
 		"""
 
 		# Check that data/value is not empty
-		self.data = value
+		# Check that it is actually a string ...
+		self.data = str(value)
 		# TODO: check for datatype of list of DataNode
 		# TODO: add option to set children=DataNode(1)
 
@@ -57,7 +58,7 @@ class DataNode:
 
 		if self.children == None:
 			self.children = []
-			self.leaf = True
+			self.leaf = False
 		self.children += [node]
 
 
@@ -107,7 +108,7 @@ class DataNode:
 		# TODO: extend merging
 		# by other attributes, by finding a good way to merge
 		print("merge", node.data)
-		self.data += ", " + node.data
+		self.data += ", " + str(node.data)
 
 
 	def remove_children(self):
@@ -143,7 +144,7 @@ class DataNode:
 
 		if tree_height == None:
 			tree_height = self.height()
-			
+
 		# Find merge children with node and remember
 		new_children = []
 
