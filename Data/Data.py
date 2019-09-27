@@ -107,7 +107,6 @@ class DataNode:
 
 		# TODO: extend merging
 		# by other attributes, by finding a good way to merge
-		print("merge", node.data)
 		self.data += ", " + str(node.data)
 
 
@@ -135,6 +134,7 @@ class DataNode:
 	def minimize_height(self, tree_height=None, cur_height=1):
 		"""
 		Minimize the height of this Node structure by one.
+		Only possible if node height is not one.
 
 		Parameters
         ----------
@@ -148,11 +148,12 @@ class DataNode:
 		# Find merge children with node and remember
 		new_children = []
 
-		for child in self.children:
-			if child.is_leaf() and ((tree_height - cur_height) == 1):
-				self.merge(child)
-			else:
-				new_children += [child]
+		if self.children:
+			for child in self.children:
+				if child.is_leaf() and ((tree_height - cur_height) == 1):
+					self.merge(child)
+				else:
+					new_children += [child]
 
 		if new_children != []:
 			self.children = new_children
@@ -217,10 +218,13 @@ class DataTree:
 		if num > self.height():
 			# TODO error
 			print("minimize_height", self.height(), num)
-			pass
+			return
 
 		for child in self.root.children:
 			child.minimize_height(self.height(), 2)
 
 		if num > 1:
 			self.minimize_height(num-1)
+
+		if num == 1 and self.height() == 2:
+			self.root.minimize_height()

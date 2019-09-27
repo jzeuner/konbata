@@ -1,1 +1,2 @@
 # TODO
+# look at setuptools 
