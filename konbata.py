@@ -12,9 +12,8 @@
 import argparse
 import sys
 import os
-from Formats.format import Format, getFormats
+from Formats.format import getFormats
 
-DEBUG = True # Set True to activate debug mode
 
 class Konbata:
     """
@@ -52,7 +51,6 @@ class Konbata:
 
         self.content = None
 
-
     def format(self, input_path, output_path, delimiter=None):
         """
         Transforms the input format into the output format.
@@ -70,10 +68,8 @@ class Konbata:
             delimiter that should be used in output format
         """
 
-        if DEBUG: print(self.input_type.name, self.output_type.name)
-
         input_filename = input_path + '.' + self.input_type.name
-        if os.path.isfile(input_filename) == False:
+        if os.path.isfile(input_filename) is False:
             raise OSError('No such file: %s' % input_filename)
             exit()
 
@@ -90,10 +86,10 @@ class Konbata:
         self.output_type.parse(self.content, output_file, delimiter)
         output_file.close()
 
-
     def save(self, output_path, output_type):
         """
-        Saves the previous formatted internal content to the additional file file_path.
+        Saves the previous formatted internal content to the additional
+        file file_path.
 
         Warning: The function also overrides the output file!
 
@@ -105,11 +101,12 @@ class Konbata:
             .TYPE_NAME, e.g. .csv
         """
 
-        if self.content == None:
+        if self.content is None:
             raise Exception("Content cannot be empty, call format before.")
             exit()
 
-        # TODO: Right now, the function also overrides file. May think of a good solution.
+        # TODO: Right now, the function also overrides file.
+        # May think of a good solution.
 
         output_filename = output_path + '.' + output_type
 
@@ -120,8 +117,8 @@ class Konbata:
 
         output_file.close()
 
-
-    def show(self, showInternalData=True, showInputData=False, showOutputData=False):
+    def show(self, showInternalData=True, showInputData=False,
+             showOutputData=False):
         """
         Function to show the string representation of the data.
 
@@ -134,7 +131,7 @@ class Konbata:
         showOutputData: bool, optional
             Default: False, if true displays output data as string
         """
-        # TODO: Think of a good way to transform the internal structure into string
+        # TODO: Think of a good way to string the internal structure
         if showInternalData:
             print(self.content)
 
@@ -144,8 +141,8 @@ class Konbata:
         if showOutputData:
             pass
 
-
-    def get(self, getInternalData=True, getInputData=False, getOutputData=False):
+    def get(self, getInternalData=True, getInputData=False,
+            getOutputData=False):
         """
         Function to get the representation of the data.
 
@@ -175,12 +172,14 @@ class Konbata:
             pass
 
 
-def konbata(input_filename, output_filename, m_save=False, m_save_filename=None, m_show=False,
-            m_get=False, delimiter=None, options=None):
+def konbata(input_filename, output_filename, m_save=False,
+            m_save_filename=None, m_show=False, m_get=False, delimiter=None,
+            options=None):
     """
     konbata: transforms the input_file into the output_file
 
-    Therefore it transforms the file format. It uses an internal data structure to do so.
+    Therefore it transforms the file format. It uses an internal data structure
+    to do so.
 
     Parameters
     ----------
@@ -211,10 +210,11 @@ def konbata(input_filename, output_filename, m_save=False, m_save_filename=None,
     k.format(input_path, output_path, delimiter)
 
     if m_save:
-        (additional_output_path, additional_output_type) = os.path.splitext(m_save_filename)
-        k.save(additional_output_path, additional_output_type)
-    if m_show: k.show()
-    if m_get: return k.get()
+        k.save(*os.path.splitext(m_save_filename))
+    if m_show:
+        k.show()
+    if m_get:
+        return k.get()
 
 
 if __name__ == '__main__':
@@ -243,8 +243,6 @@ if __name__ == '__main__':
                         help="Path of option file")
 
     args = parser.parse_args()
-
-    if DEBUG: print(args)
 
     konbata(args.input_file, args.output_file,
             m_save=args.save, m_show=args.show, m_get=args.get,
