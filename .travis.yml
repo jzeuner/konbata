@@ -2,8 +2,14 @@ language: python
 python:
   - "3.7"
 
-# install
-# - pip install -r requirements.txt
-# Dont use that yet
+install:
+  - pip install -r requirements.txt
+
+# Generate different informations
 script:
-  - python -m unittest tests/test_basic.py
+  - echo "Flake8"
+  - make run-flake8
+  - echo "Test Cases"
+  - make run-tests
+  - echo "Code Coverage"
+  - make run-coverage

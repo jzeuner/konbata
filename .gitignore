@@ -10,3 +10,6 @@ __pycache__/
 test/
 info.txt
 todos.txt
+
+# Coverage
+.coverage
