@@ -13,3 +13,4 @@ script:
   - make run-tests
   - echo "Code Coverage"
   - make run-coverage
+  - make run-display-code-coverage

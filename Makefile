@@ -11,6 +11,8 @@ run-flake8:
 run-tests:
 	python3 -m unittest Tests/test_basic.py
 
-run-coverage:
-	coverage run --source='.' -m unittest Tests/test_basic.py -b >/dev/null
+run-code-coverage:
+	coverage run --source='.' -m unittest Tests/test_basic.py -b
+	
+run-display-code-coverage:
 	coverage report -m
