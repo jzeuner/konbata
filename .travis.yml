@@ -12,5 +12,5 @@ script:
   - echo "Test Cases"
   - make run-tests
   - echo "Code Coverage"
-  - make run-coverage
+  - make run-code-coverage
   - make run-display-code-coverage
