@@ -2,15 +2,23 @@ language: python
 python:
   - "3.7"
 
+cache:
+  directories:
+  - "$HOME/.cache/pip"
+
 install:
   - pip install -r requirements.txt
 
 # Generate different informations
-script:
-  - echo "Flake8"
-  - make run-flake8
-  - echo "Test Cases"
-  - make run-tests
-  - echo "Code Coverage"
-  - make run-code-coverage
-  - make run-display-code-coverage
+jobs:
+  include:
+    - stage: "Flake8"
+      name: "Flake8"
+      script: make run-flake8
+    - stage: "Test"
+      name: "Unittest"
+      script: make run-tests
+    - stage: "Code-Coverage"
+      name: "Code-Coverage"
+      script: make run-code-coverage
+    - script: make run-display-code-coverage
