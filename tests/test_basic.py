@@ -1,12 +1,14 @@
-# TODO Add more Test functions and Test cases
+"""
+TODO Add more Test functions and Test cases
+"""
 
 import unittest
 
-from konbata import Konbata, konbata
+from konbata import Konbata
 from Data.Data import DataNode, DataTree
 from Formats.format import Format, checkTypes, getFormats
-from Formats.csv_format import csv_toTree, csv_fromTree
-from Formats.txt_format import txt_toTree, txt_fromTree
+# from Formats.csv_format import csv_toTree, csv_fromTree
+# from Formats.txt_format import txt_toTree, txt_fromTree
 
 
 class TestDataNode(unittest.TestCase):
@@ -24,7 +26,6 @@ class TestDataNode(unittest.TestCase):
         self.assertEqual(result.children, None)
         self.assertEqual(result.attribute, None)
 
-
     def test_complex_DataNode1(self):
         """
         Test a complex DataNode with all possible attributes
@@ -40,7 +41,6 @@ class TestDataNode(unittest.TestCase):
 
         self.assertEqual(result.height(), 2)
 
-
     def test_complex_DataNode2(self):
         """
         Test a complex DataNode with all possible attributes
@@ -55,7 +55,6 @@ class TestDataNode(unittest.TestCase):
         self.assertEqual(result.attribute, data[3])
 
         self.assertEqual(result.height(), 1)
-
 
     def test_add_DataNode(self):
         """
@@ -77,7 +76,6 @@ class TestDataNode(unittest.TestCase):
         self.assertEqual(t1.height(), 2)
         self.assertEqual(t2.height(), 2)
 
-
     def test_height_DataNode(self):
         """
         Test height function of DataNode.
@@ -88,7 +86,6 @@ class TestDataNode(unittest.TestCase):
 
         t1.add(DataNode(11))
         self.assertEqual(t1.height(), 2)
-
 
     def test_is_leaf_DataNode(self):
         """
@@ -103,13 +100,11 @@ class TestDataNode(unittest.TestCase):
         self.assertEqual(t1.is_leaf(), False)
         self.assertEqual(t2.is_leaf(), True)
 
-
     def test_merge_DataNode(self):
         """
         TODO
         """
         pass
-
 
     def test_remove_children_DataNode(self):
         """
@@ -135,7 +130,6 @@ class TestDataNode(unittest.TestCase):
 
         # Testing it with t1 having no children
         self.assertEqual(None, t1.remove_children())
-
 
     def test_minimize_height_DataNode(self):
         """
@@ -171,7 +165,6 @@ class TestDataTree(unittest.TestCase):
         self.assertIsNotNone(t1.root)
         self.assertEqual(t1.root.data, 'File')
 
-
     def test_simpleDataTree(self):
         """
         Test Creation of simple DataTree.
@@ -191,7 +184,6 @@ class TestDataTree(unittest.TestCase):
 
         self.assertEqual(t1.height(), 4)
         self.assertIsNotNone(t1.root.children)
-
 
     def test_height_DataTree(self):
         """
@@ -215,7 +207,6 @@ class TestDataTree(unittest.TestCase):
         self.assertEqual(t1.height(), 4)
         t1.root.add(d4)
         self.assertEqual(t1.height(), 4)
-
 
     def test_minimize_height_DataTree(self):
         """
@@ -252,9 +243,8 @@ class TestFormats(unittest.TestCase):
         Test if error got raised for not supported or empty type name.
         """
 
-        self.assertRaises(TypeError, lambda:checkTypes(['.qqr']))
-        self.assertRaises(TypeError, lambda:checkTypes(['.qqr', '.https']))
-
+        self.assertRaises(TypeError, lambda: checkTypes(['.qqr']))
+        self.assertRaises(TypeError, lambda: checkTypes(['.qqr', '.https']))
 
     def test_checkFormats(self):
         """
@@ -269,15 +259,13 @@ class TestFormats(unittest.TestCase):
         except TypeError:
             self.fail()
 
-
     def test_fail_getFormats(self):
         """
         Test the getFormats function with not supported types.
         """
 
-        self.assertRaises(TypeError, lambda:getFormats(['.qqr']))
-        self.assertRaises(TypeError, lambda:getFormats(['.qqr', '.https']))
-
+        self.assertRaises(TypeError, lambda: getFormats(['.qqr']))
+        self.assertRaises(TypeError, lambda: getFormats(['.qqr', '.https']))
 
     def test_getFormats(self):
         """
@@ -292,14 +280,16 @@ class TestFormats(unittest.TestCase):
             self.assertIsNotNone(r.loader)
             self.assertIsNotNone(r.parser)
 
-
     def test_Format(self):
         """
         Test wrong use of Format creation and one creation with two functions.
         """
 
-        self.assertRaises(Exception, Format('Fail'), 'parser and loader are needed')
-        self.assertRaises(Exception, Format('Fail', loader='loader', parser='parser'), 'parser and loader cant be strings')
+        self.assertRaises(Exception, Format('Fail'),
+                          'parser and loader are needed')
+        self.assertRaises(Exception,
+                          Format('Fail', loader='loader', parser='parser'),
+                          'parser and loader cant be strings')
 
         def test1():
             pass
@@ -321,7 +311,6 @@ class TestCsvFormat(unittest.TestCase):
         """
         pass
 
-
     def test_csv_fromTree(self):
         """
         TODO
@@ -337,7 +326,6 @@ class TestTxtFormat(unittest.TestCase):
         TODO
         """
         pass
-
 
     def test_txt_fromTree(self):
         """
@@ -368,7 +356,6 @@ class TestKonbata(unittest.TestCase):
         self.assertEqual(result.options, None)
         self.assertEqual(result.content, None)
 
-
     def test_complex_Konbata(self):
         """
         Test more complex initialization of Konbata
@@ -383,13 +370,11 @@ class TestKonbata(unittest.TestCase):
         self.assertEqual(result.options, ['1', '2'])
         self.assertEqual(result.content, None)
 
-
     def test_format_Konbata(self):
         """
         TODO find a good way to test this
         """
         pass
-
 
     def test_save_Konbata(self):
         """
@@ -397,18 +382,15 @@ class TestKonbata(unittest.TestCase):
         """
         pass
 
-
     def test_show_Konbata(self):
         """
         """
         pass
 
-
     def test_get_Konbata(self):
         """
         """
         pass
-
 
     def test_konbata(self):
         """
