@@ -4,7 +4,7 @@
 
     Python Version 3
 
-    To use:
+    How to use:
     konbata(input_filename, output_filename)
 
 """

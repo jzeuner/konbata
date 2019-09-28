@@ -1,5 +1,16 @@
 """
-	Loader and Parser for the csv format
+	Loader and Parser for the csv format.
+
+	CSV files have different options (a Dialect)
+	also see https://docs.python.org/3/library/csv.html#csv.Dialect
+		delimiter
+		doublequote
+		escapechar
+		lineterminator
+		quotechar
+		quoting
+		skipinitialspace
+		strict
 """
 
 import csv

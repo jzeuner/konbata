@@ -17,6 +17,12 @@ This is where konbata comes in place, it serves as interface between tools and f
 Just a list of some file formats:
 xml, csv, json, html, txt, ...
 
+## Usage
+```
+konbata.py [-h] [-sa] [-sh] [-g] [-del DELIMITER] [-opt OPTIONS]
+           input_file output_file
+```
+
 ## License
 [MIT License](https://github.com/jzeuner/konbata/blob/master/LICENSE)
 
@@ -30,3 +36,8 @@ Feel free to contact me (e.g via Github) or to contribute in the project.
 All kind of contributions are welcome!
 
 A detailed guide, has to be added. For right now, feel free to use the Github features to contribute.
+
+## Example
+```python
+# TODO
+```
