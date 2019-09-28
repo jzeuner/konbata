@@ -20,5 +20,6 @@ jobs:
       script: make run-tests
     - stage: "Code-Coverage"
       name: "Code-Coverage"
-      script: make run-code-coverage
-    - script: make run-display-code-coverage
+      script:
+        - make run-code-coverage
+        - make run-display-code-coverage 
