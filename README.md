@@ -1,5 +1,14 @@
 # <img alt="konbata" src="https://github.com/jzeuner/konbata_images/blob/master/logo.png">
-Test Status: [![Test Status](https://travis-ci.org/jzeuner/konbata.svg?branch=master)](https://travis-ci.org/jzeuner/konbata)
+
+| Flake8            | Unittest          | Code-Coverage     |
+|-------------------|-------------------|-------------------|
+| [![Flake8][1]][5] | [![Unittest][2]][5] | [![Code-Coverage][3]][5] |
+
+[1]: https://travis-matrix-badges.herokuapp.com/repos/jzeuner/konbata/branches/master/1
+[2]: https://travis-matrix-badges.herokuapp.com/repos/jzeuner/konbata/branches/master/2
+[3]: https://travis-matrix-badges.herokuapp.com/repos/jzeuner/konbata/branches/master/3
+[5]: https://travis-ci.org/jzeuner/konbata
+
 ---
 #### What is it?
 Konbata is a python libary, that allows you to covert a file.
