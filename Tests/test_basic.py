@@ -163,7 +163,7 @@ class TestDataTree(unittest.TestCase):
 
         self.assertEqual(t1.height(), 1)
         self.assertIsNotNone(t1.root)
-        self.assertEqual(t1.root.data, 'File')
+        self.assertEqual(t1.root.data, 'FileRoot')
 
     def test_simpleDataTree(self):
         """
@@ -285,11 +285,9 @@ class TestFormats(unittest.TestCase):
         Test wrong use of Format creation and one creation with two functions.
         """
 
-        self.assertRaises(Exception, Format('Fail'),
-                          'parser and loader are needed')
-        self.assertRaises(Exception,
-                          Format('Fail', loader='loader', parser='parser'),
-                          'parser and loader cant be strings')
+        self.assertRaises(TypeError, lambda: Format('Fail'))
+        self.assertRaises(TypeError, lambda: Format('Fail',
+                          loader='loader', parser='parser'))
 
         def test1():
             pass
