@@ -1,5 +1,5 @@
 """
-TODO
+    Loader and Parser for the txt format.
 """
 
 from Data.Data import DataNode, DataTree
@@ -7,12 +7,21 @@ from Data.Data import DataNode, DataTree
 
 def txt_toTree(file, delimiter=None, options=None):
     """
-    TODO
+    Function transforms a txt file into a DataTree.
+
+    Parameters
+    ----------
+    file: file
+        open input file in at least read mode
+    delimiter: TODO
+    options: list, optional
+
+    Returns
+    -------
+    tree: DataTree
     """
 
     tree = DataTree(type='txt')
-
-    # TODO catch empty file
 
     # TODO add more options
     for row in file.readlines():
@@ -23,10 +32,19 @@ def txt_toTree(file, delimiter=None, options=None):
 
 def txt_fromTree(tree, file, options=None):
     """
-    TODO
+    Function transforms a DataTree into a csv file.
+
+    Parameters
+    ----------
+    tree: DataTree
+    file: file
+        open output file in at least write mode
+    options: list, optional
     """
 
-    # TODO case empty tree ... or no tree
+    if not isinstance(tree, DataTree):
+        raise TypeError('tree must be type of DataTree')
+
     if tree.height() != 2 or tree.type != 'txt':
         if tree.height() > 2:
             tree.minimize_height(tree.height()-2)

@@ -9,7 +9,7 @@ from konbata import Konbata
 from Data.Data import DataNode, DataTree
 from Formats.format import Format, checkTypes, getFormats
 from Formats.csv_format import csv_toTree, csv_fromTree
-# from Formats.txt_format import txt_toTree, txt_fromTree
+from Formats.txt_format import txt_toTree, txt_fromTree
 
 # Constants
 PATH_INPUT_FILES = "./Tests/test_files/"
@@ -458,16 +458,61 @@ class TestTxtFormat(unittest.TestCase):
 
     def test_txt_toTree(self):
         """
-        TODO
+        Test the txt to DataTree function.
         """
-        pass
+
+        with open(PATH_INPUT_FILES + 'input_test.txt', 'r') as inputfile:
+            tree = txt_toTree(inputfile)
+
+        inputfile.close()
+
+        self.assertIsNotNone(tree)
+        self.assertEqual(tree.type, 'txt')
+        self.assertEqual(tree.height(), 2)
+
+        self.assertIsNotNone(tree.root.children)
+
+        for child in tree.root.children:
+            self.assertIsNotNone(child.data)
+            self.assertEqual(child.height(), 1)
 
     def test_txt_fromTree(self):
         """
-        TODO
+        Test the DataTree to txt function.
         """
-        pass
 
+        """
+        Test the DataTree to csv function.
+        """
+
+        # Prepare DataTree
+        row0 = DataNode('Row0')
+        row1 = DataNode('Row1')
+        row2 = DataNode('Row2')
+        row3 = DataNode('Row3')
+        row4 = DataNode('Row4')
+
+        tree = DataTree(type='txt')
+        tree.root.add(row0)
+        tree.root.add(row1)
+        tree.root.add(row2)
+        tree.root.add(row3)
+        tree.root.add(row4)
+
+        # Run function
+        outfile = StringIO()
+
+        txt_fromTree(tree, outfile)
+
+        outfile.seek(0)
+        content = outfile.read()
+
+        with open(PATH_INPUT_FILES + 'input_test.txt', 'r') as inputfile:
+            real_content = inputfile.readlines()
+
+        inputfile.close()
+
+        self.assertEqual(content, ''.join(real_content))
 
 class TestXmlFormat(unittest.TestCase):
     # TODO
