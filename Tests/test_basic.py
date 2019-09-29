@@ -514,6 +514,7 @@ class TestTxtFormat(unittest.TestCase):
 
         self.assertEqual(content, ''.join(real_content))
 
+
 class TestXmlFormat(unittest.TestCase):
     # TODO
     pass
