@@ -3,12 +3,16 @@ TODO Add more Test functions and Test cases
 """
 
 import unittest
+from io import StringIO
 
 from konbata import Konbata
 from Data.Data import DataNode, DataTree
 from Formats.format import Format, checkTypes, getFormats
-# from Formats.csv_format import csv_toTree, csv_fromTree
+from Formats.csv_format import csv_toTree, csv_fromTree
 # from Formats.txt_format import txt_toTree, txt_fromTree
+
+# Constants
+PATH_INPUT_FILES = "./Tests/test_files/"
 
 
 class TestDataNode(unittest.TestCase):
@@ -29,19 +33,38 @@ class TestDataNode(unittest.TestCase):
     def test_complex_DataNode1(self):
         """
         Test a complex DataNode with all possible attributes
+
+        Single child
+        """
+
+        data = ('1', "tag", DataNode('child'), 'attribute')
+
+        result = DataNode(*data)
+
+        self.assertEqual(result.data, data[0])
+        self.assertEqual(result.tag, data[1])
+        self.assertEqual(result.children, [data[2]])
+        self.assertEqual(result.attribute, data[3])
+        self.assertEqual(result.height(), 2)
+
+    def test_complex_DataNode2(self):
+        """
+        Test a complex DataNode with all possible attributes
+
+        List of childs
         """
 
         data = ('1', "tag", [DataNode('child')], 'attribute')
+
         result = DataNode(*data)
 
         self.assertEqual(result.data, data[0])
         self.assertEqual(result.tag, data[1])
         self.assertEqual(result.children, data[2])
         self.assertEqual(result.attribute, data[3])
-
         self.assertEqual(result.height(), 2)
 
-    def test_complex_DataNode2(self):
+    def test_complex_DataNode3(self):
         """
         Test a complex DataNode with all possible attributes
         """
@@ -76,6 +99,16 @@ class TestDataNode(unittest.TestCase):
         self.assertEqual(t1.height(), 2)
         self.assertEqual(t2.height(), 2)
 
+    def test_add_DataNode2(self):
+        """
+        Test add function of DataNode.
+
+        Test fail of add function
+        """
+
+        t1 = DataNode('1')
+        self.assertRaises(TypeError, lambda: t1.add("DataNode"))
+
     def test_height_DataNode(self):
         """
         Test height function of DataNode.
@@ -102,9 +135,35 @@ class TestDataNode(unittest.TestCase):
 
     def test_merge_DataNode(self):
         """
-        TODO
+        Test merge function.
+
+        With correct delimiter.
         """
-        pass
+
+        t1 = DataNode('1')
+        t2 = DataNode('2')
+
+        self.assertEqual(t1.data, "1")
+
+        t1.merge(t2)
+
+        self.assertEqual(t1.data, "1 2")
+
+        t1.merge(t2, ";")
+
+        self.assertEqual(t1.data, "1 2;2")
+
+    def test_merge_DataNode2(self):
+        """
+        Test merge function.
+
+        With wrong delimiter.
+        """
+
+        t1 = DataNode('1')
+        t2 = DataNode('2')
+
+        self.assertRaises(TypeError, lambda: t1.merge(t2, 3))
 
     def test_remove_children_DataNode(self):
         """
@@ -208,6 +267,34 @@ class TestDataTree(unittest.TestCase):
         t1.root.add(d4)
         self.assertEqual(t1.height(), 4)
 
+    def test_increase_height_DataTree(self):
+        """
+        Test increase_height function of DataTree.
+        """
+
+        t1 = DataTree()
+
+        self.assertEqual(t1.height(), 1)
+
+        d1 = DataNode(1)
+        d2 = DataNode(2)
+
+        t1.root.add(d1)
+        d1.add(d2)
+
+        self.assertEqual(t1.height(), 3)
+
+        t1.increase_height(1)
+
+        self.assertEqual(t1.height(), 4)
+
+        t1.increase_height(4)
+
+        self.assertEqual(t1.height(), 8)
+
+        self.assertRaises(TypeError, lambda: t1.increase_height('3'))
+        self.assertRaises(ValueError, lambda: t1.increase_height(-4))
+
     def test_minimize_height_DataTree(self):
         """
         Test minimize_height function of DataTree.
@@ -234,6 +321,9 @@ class TestDataTree(unittest.TestCase):
 
         t1.minimize_height(3)
         self.assertEqual(t1.height(), 1)
+
+        self.assertRaises(ValueError, lambda: t1.minimize_height(7))
+        self.assertRaises(TypeError, lambda: t1.minimize_height('3'))
 
 
 class TestFormats(unittest.TestCase):
@@ -301,19 +391,66 @@ class TestFormats(unittest.TestCase):
 
 
 class TestCsvFormat(unittest.TestCase):
-    # csv_format TODO
 
     def test_csv_toTree(self):
         """
-        TODO
+        Test the csv to DataTree function.
         """
-        pass
+
+        with open(PATH_INPUT_FILES + 'input_test.csv', 'r') as inputfile:
+            tree = csv_toTree(inputfile, ',')
+
+        inputfile.close()
+
+        self.assertIsNotNone(tree)
+        self.assertEqual(tree.type, 'csv')
+        self.assertEqual(tree.height(), 3)
+
+        self.assertIsNotNone(tree.root.children)
+
+        for child in tree.root.children:
+            self.assertIsNotNone(child.children)
+            self.assertEqual(child.height(), 2)
+            self.assertEqual(len(child.children), 3)
 
     def test_csv_fromTree(self):
         """
-        TODO
+        Test the DataTree to csv function.
         """
-        pass
+
+        # Prepare DataTree
+        row0 = DataNode('Row0', children=[DataNode('Col1'), DataNode('Col2'),
+                                          DataNode('Col3')])
+        row1 = DataNode('Row1', children=[DataNode('Row11'), DataNode('Row12'),
+                                          DataNode('Row13')])
+        row2 = DataNode('Row2', children=[DataNode('Row21'), DataNode('Row22'),
+                                          DataNode('Row23')])
+        row3 = DataNode('Row3', children=[DataNode('Row31'), DataNode('Row32'),
+                                          DataNode('Row33')])
+        row4 = DataNode('Row4', children=[DataNode('Row41'), DataNode('Row42'),
+                                          DataNode('Row43')])
+
+        tree = DataTree(type='csv')
+        tree.root.add(row0)
+        tree.root.add(row1)
+        tree.root.add(row2)
+        tree.root.add(row3)
+        tree.root.add(row4)
+
+        # Run function
+        outfile = StringIO()
+
+        csv_fromTree(tree, outfile)
+
+        outfile.seek(0)
+        content = outfile.read()
+
+        with open(PATH_INPUT_FILES + 'input_test.csv', 'r') as inputfile:
+            real_content = inputfile.readlines()
+
+        inputfile.close()
+
+        self.assertEqual(content, ''.join(real_content).replace('\n', '\r\n'))
 
 
 class TestTxtFormat(unittest.TestCase):
@@ -333,6 +470,11 @@ class TestTxtFormat(unittest.TestCase):
 
 
 class TestXmlFormat(unittest.TestCase):
+    # TODO
+    pass
+
+
+class TestXlsFormat(unittest.TestCase):
     # TODO
     pass
 

@@ -19,15 +19,23 @@ from Data.Data import DataNode, DataTree
 
 def csv_toTree(file, delimiter, ignore_index=True, options=None):
     """
-    TODO
+    Function transforms a csv file into a DataTree.
+
+    Parameters
+    ----------
+    file: file
+        open input file in at least read mode
+    delimiter: str
+    ignore_index: bool, optional
+    options: list, optional
+
+    Returns
+    -------
+    tree: DataTree
     """
 
     # TODO add option column or row store
     csv_reader = csv.reader(file, delimiter=delimiter)
-
-    if csv_reader.line_num <= 0:
-        # TODO EMPTY CSV
-        pass
 
     tree = DataTree(type='csv')
 
@@ -45,10 +53,19 @@ def csv_toTree(file, delimiter, ignore_index=True, options=None):
 
 def csv_fromTree(tree, file, options=None):
     """
-    TODO
+    Function transforms a DataTree into a csv file.
+
+    Parameters
+    ----------
+    tree: DataTree
+    file: file
+        open output file in at least write mode
+    options: list, optional
     """
-    # TODO case empty tree ... or no tree
-    print(tree.height())
+
+    if not isinstance(tree, DataTree):
+        raise TypeError('tree must be type of DataTree')
+
     if tree.type != 'csv' or tree.height() != 3:
         # Height of tree needs to be flatten or need to be increased
         if tree.height() > 3:

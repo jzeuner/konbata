@@ -222,7 +222,10 @@ class DataTree:
         num: int
         """
 
-        if num <= 0 or not isinstance(num, int):
+        if not isinstance(num, int):
+            raise TypeError('num must be an positive not zero integer')
+
+        if num <= 0:
             raise ValueError('num must be an positive not zero integer')
 
         old_children = self.root.remove_children()
@@ -248,7 +251,11 @@ class DataTree:
             has to be greater than tree.height()
         """
 
-        if num > self.height() or not isinstance(num, int):
+        if not isinstance(num, int):
+            raise TypeError("""num must be an positive not zero integer,
+                                that is greater than the height of the tree""")
+
+        if num > self.height():
             raise ValueError("""num must be an positive not zero integer,
                                 that is greater than the height of the tree""")
 
