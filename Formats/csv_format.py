@@ -71,7 +71,6 @@ def csv_fromTree(tree, file, options=None):
         if tree.height() > 3:
             tree.minimize_height(tree.height()-3)
         elif tree.height() < 3:
-            print('increase', 3-tree.height())
             tree.increase_height(3-tree.height())
 
     # Here we have a tree of the right shape

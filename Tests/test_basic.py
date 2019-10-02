@@ -520,7 +520,7 @@ class TestXmlFormat(unittest.TestCase):
     pass
 
 
-class TestXlsFormat(unittest.TestCase):
+class TestXlsxFormat(unittest.TestCase):
     # TODO
     pass
 

@@ -5,8 +5,8 @@ import types
 
 # Supported File Formats
 
-TYPES = {'.csv': ('csv', [';', ','], csv_toTree, csv_fromTree),
-         '.txt': ('txt', [';', ','], txt_toTree, txt_fromTree)}
+TYPES = {'.csv': ('csv', [';', ','], csv_toTree, 'f', csv_fromTree, 'f'),
+         '.txt': ('txt', [';', ','], txt_toTree, 'f', txt_fromTree, 'f')}
 
 
 class Format:
