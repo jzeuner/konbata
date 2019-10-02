@@ -25,7 +25,7 @@ def xlsx_toTree(file_name):
     """
 
     # TODO: add options guess_type, data_only, keep_vba
-    
+
     xlsx_reader = load_workbook(filename=file_name)
 
     tree = DataTree(type='xlsx')
@@ -38,9 +38,9 @@ def xlsx_toTree(file_name):
         # and create tree like csv file
 
         for row_i in range(1, sheet.max_row + 1):
-            row_node = DataNode('Row%s' % i)
+            row_node = DataNode('Row%s' % row_i)
             for col_j in range(1, sheet.max_col + 1):
-                cell_obj = sheet_obj.cell(row=row_i, column=col_j)
+                cell_obj = sheet.cell(row=row_i, column=col_j)
                 col_node = DataNode(str(cell_obj.value))
                 row_node.add(col_node)
             sheet_node.add(row_node)
