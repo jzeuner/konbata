@@ -178,6 +178,34 @@ class DataNode:
             for child in self.children:
                 child.minimize_height(tree_height, cur_height+1)
 
+    def generate_string_representation(self, i=0):
+        """
+        Generates string representation of the DataNode.
+
+        Returns
+        -------
+        NodeRepresentation: str
+        """
+
+        TAB = "    "
+
+        output = i*TAB + str(self) + "\n"
+
+        if self.is_leaf():
+            return output
+
+        for children in self.children:
+            output += children.generate_string_representation(i=i+1) + "\n"
+
+        return output
+
+    def __str__(self):
+        """
+        String Data of DataNode
+        """
+
+        return str(self.data)
+
 
 class DataTree:
     """
@@ -267,3 +295,22 @@ class DataTree:
 
         if num == 1 and self.height() == 2:
             self.root.minimize_height()
+
+    def generate_string_representation(self):
+        """
+        Generates string representation of the DataTree.
+
+        Returns
+        -------
+        TreeRepresentation: str
+        """
+
+        if self.root.is_leaf():
+            return ""
+
+        output = ""
+
+        for children in self.root.children:
+            output += children.generate_string_representation() + "\n"
+
+        return output

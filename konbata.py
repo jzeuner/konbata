@@ -133,7 +133,7 @@ class Konbata:
         """
         # TODO: Think of a good way to string the internal structure
         if showInternalData:
-            print(self.content)
+            print(self.content.generate_string_representation())
 
         if showInputData:
             pass
@@ -168,7 +168,7 @@ class Konbata:
         if getInputData:
             pass
 
-        if getInputData:
+        if getOutputData:
             pass
 
 

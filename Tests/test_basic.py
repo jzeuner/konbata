@@ -210,6 +210,18 @@ class TestDataNode(unittest.TestCase):
 
         # TODO test call with tree_height and cur_height
 
+    def test_generate_string_representation_DataNode(self):
+        """
+        TODO
+        """
+        pass
+
+    def test___str___DataNode(self):
+        """
+        TODO
+        """
+        pass
+
 
 class TestDataTree(unittest.TestCase):
 
@@ -324,6 +336,12 @@ class TestDataTree(unittest.TestCase):
 
         self.assertRaises(ValueError, lambda: t1.minimize_height(7))
         self.assertRaises(TypeError, lambda: t1.minimize_height('3'))
+
+    def test_generate_string_representation_DataTree(self):
+        """
+        TODO
+        """
+        pass
 
 
 class TestFormats(unittest.TestCase):
