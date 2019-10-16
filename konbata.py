@@ -51,7 +51,7 @@ class Konbata:
 
         self.content = None
 
-    def format(self, input_path, output_path, delimiter=None):
+    def format(self, in_path, out_path, delimiter=None):
         """
         Transforms the input format into the output format.
         Then stores the content in the Konbata output variable.
@@ -68,25 +68,19 @@ class Konbata:
             delimiter that should be used in output format
         """
 
-        input_filename = input_path + '.' + self.input_type.name
-        if os.path.isfile(input_filename) is False:
-            raise OSError('No such file: %s' % input_filename)
+        in_filename = in_path + '.' + self.input_type.name
+
+        if os.path.isfile(in_filename) is False:
+            raise OSError('No such file: %s' % in_filename)
             exit()
 
-        output_filename = output_path + '.' + self.output_type.name
+        out_filename = out_path + '.' + self.output_type.name
 
-        # TODO: Catch errors
-        input_file = open(input_filename, 'r')
+        self.content = self.input_type.load(in_filename, delimiter)
 
-        self.content = self.input_type.load(input_file, delimiter)
-        input_file.close()
+        self.output_type.parse(self.content, out_filename, delimiter)
 
-        output_file = open(output_filename, 'w', newline='')
-
-        self.output_type.parse(self.content, output_file, delimiter)
-        output_file.close()
-
-    def save(self, output_path, output_type):
+    def save(self, out_paths=[], out_types=[]):
         """
         Saves the previous formatted internal content to the additional
         file file_path.
@@ -108,14 +102,13 @@ class Konbata:
         # TODO: Right now, the function also overrides file.
         # May think of a good solution.
 
-        output_filename = output_path + '.' + output_type
+        # TODO Check for empty array or that len =! len
 
-        output_file = open(output_filename, 'w')
+        for i in range(len(out_paths)):
+            out_filename = out_paths[i] + '.' + out_types[i]
 
-        format = getFormats([output_type])[0]
-        format.parse(self.content, output_file)
-
-        output_file.close()
+            format = getFormats([out_types[i]])[0]
+            format.parse(self.content, out_filename)
 
     def show(self, showInternalData=True, showInputData=False,
              showOutputData=False):

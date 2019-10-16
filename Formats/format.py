@@ -48,7 +48,7 @@ class Format:
         self.loader = loader
         self.parser = parser
 
-    def load(self, file, delimiter=None):
+    def load(self, path, delimiter=None):
         """
         Uses the loader function to load a file into the internal data
         structure.
@@ -64,15 +64,22 @@ class Format:
         content: DataTree
         """
 
-        if delimiter is None:
-            return self.loader(file, self.delimiters[0])
-
         if not isinstance(delimiter, str):
             raise TypeError('delimiter must be a str')
 
-        return self.loader(file, delimiter)
+        # TODO: Catch errors
+        in_file = open(path, 'r')
 
-    def parse(self, content, file, delimiter=None):
+        if delimiter is None:
+            output = self.loader(in_file, self.delimiters[0])
+        else:
+            output = self.loader(in_file, delimiter)
+
+        in_file.close()
+
+        return output
+
+    def parse(self, content, path, delimiter=None):
         """
         Uses the parser function to parse the internal data structure into the
         format.
@@ -85,13 +92,17 @@ class Format:
             If delimiter is none the first format delimiter is used
         """
 
-        if delimiter is None:
-            self.parser(content, file, self.delimiters[0])
-        else:
-            if not isinstance(delimiter, str):
-                raise TypeError('delimiter must be a str')
+        if not isinstance(delimiter, str):
+            raise TypeError('delimiter must be a str')
 
-            self.parser(content, file, delimiter)
+        out_file = open(path, 'w', newline='')
+
+        if delimiter is None:
+            self.parser(content, out_file, self.delimiters[0])
+        else:
+            self.parser(content, out_file, delimiter)
+
+        out_file.close()
 
 
 def checkTypes(type_names=[]):
