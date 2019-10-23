@@ -7,7 +7,8 @@ from io import StringIO
 
 from konbata import Konbata
 from Data.Data import DataNode, DataTree
-from Formats.format import Format, checkTypes, getFormats
+from Formats.Format import Format
+from Formats.FormatLoader import checkTypes, getFormats
 from Formats.csv_format import csv_toTree, csv_fromTree
 from Formats.txt_format import txt_toTree, txt_fromTree
 

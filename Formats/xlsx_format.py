@@ -9,6 +9,7 @@
 
 from Data.Data import DataNode, DataTree
 from openpyxl import Workbook, load_workbook
+from Formats.Format import Format
 
 
 def xlsx_toTree(file_name):
@@ -82,3 +83,7 @@ def xlsx_fromTree(tree, file_name, options=None):
             row_i += 1
 
     xlsx_wb.save(filename=file_name)
+
+
+xlsx_format = Format('xlsx', [';', ','], xlsx_toTree, xlsx_fromTree,
+                     pre_open=False)

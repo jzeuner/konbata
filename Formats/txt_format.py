@@ -3,6 +3,7 @@
 """
 
 from Data.Data import DataNode, DataTree
+from Formats.Format import Format
 
 
 def txt_toTree(file, delimiter=None, options=None):
@@ -54,3 +55,6 @@ def txt_fromTree(tree, file, options=None):
     for row_node in tree.root.children:
         file.write(row_node.data)
         file.write('\n')
+
+
+txt_format = Format('txt', [';', ','], txt_toTree, txt_fromTree)

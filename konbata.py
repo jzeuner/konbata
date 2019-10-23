@@ -12,7 +12,7 @@
 import argparse
 import sys
 import os
-from Formats.format import getFormats
+from Formats.FormatLoader import getFormats
 
 
 class Konbata:

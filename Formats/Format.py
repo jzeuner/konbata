@@ -1,12 +1,8 @@
-from .csv_format import csv_toTree, csv_fromTree
-from .txt_format import txt_toTree, txt_fromTree
+"""
+TODO
+"""
 
 import types
-
-# Supported File Formats
-
-TYPES = {'.csv': ('csv', [';', ','], csv_toTree, csv_fromTree),
-         '.txt': ('txt', [';', ','], txt_toTree, txt_fromTree)}
 
 
 class Format:
@@ -18,7 +14,8 @@ class Format:
     format.
     """
 
-    def __init__(self, name, delimiters=[], loader=None, parser=None):
+    def __init__(self, name, delimiters=[], loader=None, parser=None,
+                 pre_open=True):
         """
         Initiates the Format class.
 
@@ -34,6 +31,9 @@ class Format:
         parser: function
             parser function that parses an internal data structure into a file
             of the format
+        pre_open: bool, optional
+            default: if true parser and loader functions are getting an opened
+            file; Else the path to the file is submitted
         """
 
         self.name = name
@@ -47,6 +47,8 @@ class Format:
 
         self.loader = loader
         self.parser = parser
+
+        self.pre_open = pre_open
 
     def load(self, path, delimiter=None):
         """
@@ -67,13 +69,16 @@ class Format:
         if not isinstance(delimiter, str):
             raise TypeError('delimiter must be a str')
 
+        if delimiter is None:
+            delimiter = self.delimiters[0]
+
+        if not self.pre_open:
+            return self.loader(path, delimiter)
+
         # TODO: Catch errors
         in_file = open(path, 'r')
 
-        if delimiter is None:
-            output = self.loader(in_file, self.delimiters[0])
-        else:
-            output = self.loader(in_file, delimiter)
+        output = self.loader(in_file, delimiter)
 
         in_file.close()
 
@@ -95,50 +100,15 @@ class Format:
         if not isinstance(delimiter, str):
             raise TypeError('delimiter must be a str')
 
+        if delimiter is None:
+            delimiter = self.delimiters[0]
+
+        if not self.pre_open:
+            self.parser(path, delimiter)
+            return
+
         out_file = open(path, 'w', newline='')
 
-        if delimiter is None:
-            self.parser(content, out_file, self.delimiters[0])
-        else:
-            self.parser(content, out_file, delimiter)
+        self.parser(content, out_file, delimiter)
 
         out_file.close()
-
-
-def checkTypes(type_names=[]):
-    """
-    Cheks if a list of types is supported by the tool.
-    If not supported it raises a TypeError exception.
-
-    Parameters
-    ----------
-    type_names: list
-    """
-
-    for type_name in type_names:
-        if type_name not in TYPES:
-            raise TypeError('Type %s not supported.' % type_name)
-            exit()
-
-
-def getFormats(type_names=[]):
-    """
-    Generates a list of formats to a list of type names.
-
-    Parameters
-    ----------
-    type_names: list
-        each type is a str and looks like this '.type'
-
-    Returns
-    -------
-    types: list
-        list of Type Objects
-    """
-
-    if not isinstance(type_names, list):
-        raise TypeError('type_names must be a list')
-
-    checkTypes(type_names)
-
-    return [Format(*TYPES[type_name]) for type_name in type_names]

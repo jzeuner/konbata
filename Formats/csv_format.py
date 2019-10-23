@@ -15,6 +15,7 @@
 
 import csv
 from Data.Data import DataNode, DataTree
+from Formats.Format import Format
 
 
 def csv_toTree(file, delimiter, ignore_index=True, options=None):
@@ -79,3 +80,6 @@ def csv_fromTree(tree, file, options=None):
 
     for row_node in tree.root.children:
         csv_writer.writerow([col_node.data for col_node in row_node.children])
+
+
+csv_format = Format('csv', [';', ','], csv_toTree, csv_fromTree)
