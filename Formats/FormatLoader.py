@@ -1,5 +1,5 @@
 """
-TODO
+    FormatLoader functions, that serve as interface to check and get formats.
 """
 
 from .csv_format import csv_format

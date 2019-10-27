@@ -15,6 +15,7 @@ from Formats.Format import Format
 def xlsx_toTree(file_name):
     """
     Function transforms a xlsx file into a DataTree.
+    Therefore it needs the path of the original file.
 
     Parameters
     ----------

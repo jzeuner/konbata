@@ -1,5 +1,9 @@
 """
-TODO
+    Format Class that represents hierarcical file format.
+
+    With individual functions, the format can be parsed into the internal
+    data representation or such an representation can be reloaded into the
+    individual format.
 """
 
 import types

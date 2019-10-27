@@ -1,9 +1,9 @@
 """
-Internal data structure for the Konbata libary.
+    Internal data structure for the Konbata libary.
 
-Main idea is a data structure that can store data (of any file format)
-in form of a tree. One of the main goals here is to create a DataTree.
-This tree should be manipulated and serve as comfortable structure.
+    Main idea is a data structure that can store data (of any file format)
+    in form of a tree. One of the main goals here is to create a DataTree.
+    This tree should be manipulated and serve as comfortable structure.
 """
 
 

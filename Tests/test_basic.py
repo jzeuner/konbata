@@ -1,5 +1,5 @@
 """
-TODO Add more Test functions and Test cases
+    Basic Test Suite for the Konbata.py Project
 """
 
 import unittest
