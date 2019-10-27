@@ -15,7 +15,7 @@ class DataNode:
     So the node is an inner node or it is a leaf.
     """
 
-    def __init__(self, value, tag=None, children=None, attribute=None):
+    def __init__(self, value, children=None):
         """
         Initiates the current DataNode.
 
@@ -24,12 +24,8 @@ class DataNode:
         value: str
             If value is no string, it gets transfomred in its string
             representation.
-        tag: str, optional
-            TODO
         children: list, optional
             list of DataNodes
-        attribute: list, optional
-            TODO list of additional options
         """
 
         if not isinstance(value, str):
@@ -50,8 +46,9 @@ class DataNode:
             # Allow calls with option like children=DataNode('1')
             self.add(children)
 
-        self.tag = tag
-        self.attribute = attribute
+        self.element = True
+        self.tag = False
+        self.attribute = False
 
     def add(self, node):
         """
@@ -105,6 +102,27 @@ class DataNode:
 
         return self.leaf
 
+    def is_element(self):
+        """
+        TODO
+        """
+
+        return self.element
+
+    def is_tag(self):
+        """
+        TODO
+        """
+
+        return self.tag
+
+    def is_attribute(self):
+        """
+        TODO
+        """
+
+        return self.attribute
+
     def merge(self, node, delimiter=" "):
         """
         Merges the data, with the data of the merge node.
@@ -122,7 +140,7 @@ class DataNode:
         if not isinstance(delimiter, str):
             raise TypeError('Merge needs a delimiter of type str')
 
-        self.data += delimiter + node.data
+        self.data += delimiter + str(node)
 
     def remove_children(self):
         """
@@ -205,6 +223,41 @@ class DataNode:
         """
 
         return str(self.data)
+
+
+class TagNode(DataNode):
+    """
+    Class that represents a TagNode.
+    """
+
+    def __init__(self, value, children=None):
+        super().__init__(value, children)
+        self.element = False
+        self.tag = True
+
+
+class AttributeNode(DataNode):
+    """
+    Class that represents an AttributeNode.
+    """
+
+    def __init__(self, key, value, children=None):
+        super().__init__(value, children)
+
+        if not isinstance(key, str):
+            self.key = str(key)
+        else:
+            self.key = key
+
+        self.element = False
+        self.attribute = True
+
+    def __str__(self):
+        """
+        String Data of AttributeNode
+        """
+
+        return str(self.key) + '="' + str(self.data) + '"'
 
 
 class DataTree:
