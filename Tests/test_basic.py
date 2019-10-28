@@ -27,9 +27,7 @@ class TestDataNode(unittest.TestCase):
         result = DataNode(data)
 
         self.assertEqual(result.data, data)
-        self.assertEqual(result.tag, None)
         self.assertEqual(result.children, None)
-        self.assertEqual(result.attribute, None)
 
     def test_complex_DataNode1(self):
         """
@@ -38,14 +36,12 @@ class TestDataNode(unittest.TestCase):
         Single child
         """
 
-        data = ('1', "tag", DataNode('child'), 'attribute')
+        data = ('1', DataNode('child'))
 
         result = DataNode(*data)
 
         self.assertEqual(result.data, data[0])
-        self.assertEqual(result.tag, data[1])
-        self.assertEqual(result.children, [data[2]])
-        self.assertEqual(result.attribute, data[3])
+        self.assertEqual(result.children, [data[1]])
         self.assertEqual(result.height(), 2)
 
     def test_complex_DataNode2(self):
@@ -55,14 +51,12 @@ class TestDataNode(unittest.TestCase):
         List of childs
         """
 
-        data = ('1', "tag", [DataNode('child')], 'attribute')
+        data = ('1', [DataNode('child')])
 
         result = DataNode(*data)
 
         self.assertEqual(result.data, data[0])
-        self.assertEqual(result.tag, data[1])
-        self.assertEqual(result.children, data[2])
-        self.assertEqual(result.attribute, data[3])
+        self.assertEqual(result.children, data[1])
         self.assertEqual(result.height(), 2)
 
     def test_complex_DataNode3(self):
@@ -70,13 +64,11 @@ class TestDataNode(unittest.TestCase):
         Test a complex DataNode with all possible attributes
         """
 
-        data = ('1', "tag", None, 'attribute')
+        data = ('1', None)
         result = DataNode(*data)
 
         self.assertEqual(result.data, data[0])
-        self.assertEqual(result.tag, data[1])
         self.assertEqual(result.children, None)
-        self.assertEqual(result.attribute, data[3])
 
         self.assertEqual(result.height(), 1)
 
@@ -222,6 +214,16 @@ class TestDataNode(unittest.TestCase):
         TODO
         """
         pass
+
+
+class TestTagNode(unittest.TestCase):
+    # TODO
+    pass
+
+
+class TestAttributeNode(unittest.TestCase):
+    # TODO
+    pass
 
 
 class TestDataTree(unittest.TestCase):
