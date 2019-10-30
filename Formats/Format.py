@@ -79,7 +79,6 @@ class Format:
         if not self.pre_open:
             return self.loader(path, delimiter)
 
-        # TODO: Catch errors
         in_file = open(path, 'r')
 
         output = self.loader(in_file, delimiter)

@@ -675,7 +675,6 @@ class TestCsvFormat(unittest.TestCase):
 
 
 class TestTxtFormat(unittest.TestCase):
-    # TODO
 
     def test_txt_toTree(self):
         """

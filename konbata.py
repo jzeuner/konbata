@@ -124,7 +124,7 @@ class Konbata:
         showOutputData: bool, optional
             Default: False, if true displays output data as string
         """
-        # TODO: Think of a good way to string the internal structure
+
         if showInternalData:
             print(self.content.generate_string_representation())
 
