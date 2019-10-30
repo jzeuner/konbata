@@ -104,21 +104,45 @@ class DataNode:
 
     def is_element(self):
         """
-        TODO
+        Returns if the node is a element.
+
+        True: node is element
+        False: node is tag or attribute
+
+        Returns
+        -------
+        is_element: bool
+            True is returned, if node is a element.
         """
 
         return self.element
 
     def is_tag(self):
         """
-        TODO
+        Returns if the node is a tag.
+
+        True: node is tag
+        False: node is element or attribute
+
+        Returns
+        -------
+        is_tag: bool
+            True is returned, if node is a tag.
         """
 
         return self.tag
 
     def is_attribute(self):
         """
-        TODO
+        Returns if the node is a attribute.
+
+        True: node is attribute
+        False: node is element or tag
+
+        Returns
+        -------
+        is_attribute: bool
+            True is returned, if node is a attribute.
         """
 
         return self.attribute
@@ -133,9 +157,6 @@ class DataNode:
         delimiter: str, optional
             for example: delimiter=';'
         """
-
-        # TODO: extend merging when we know more about the strucutre of other
-        # file formats
 
         if not isinstance(delimiter, str):
             raise TypeError('Merge needs a delimiter of type str')

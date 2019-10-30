@@ -6,7 +6,7 @@ import unittest
 from io import StringIO
 
 from konbata import Konbata
-from Data.Data import DataNode, DataTree
+from Data.Data import DataNode, TagNode, AttributeNode, DataTree
 from Formats.Format import Format
 from Formats.FormatLoader import checkTypes, getFormats
 from Formats.csv_format import csv_toTree, csv_fromTree
@@ -126,6 +126,27 @@ class TestDataNode(unittest.TestCase):
         self.assertEqual(t1.is_leaf(), False)
         self.assertEqual(t2.is_leaf(), True)
 
+    def test_is_element_DataNode(self):
+        """
+        Test is_element function of DataNode.
+        """
+        t1 = DataNode(1)
+        self.assertEqual(t1.is_element(), True)
+
+    def test_is_tag_DataNode(self):
+        """
+        Test is_tag function of DataNode.
+        """
+        t1 = DataNode(1)
+        self.assertEqual(t1.is_tag(), False)
+
+    def test_is_attribute_DataNode(self):
+        """
+        Test is_attribute function of DataNode.
+        """
+        t1 = DataNode(1)
+        self.assertEqual(t1.is_attribute(), False)
+
     def test_merge_DataNode(self):
         """
         Test merge function.
@@ -211,20 +232,199 @@ class TestDataNode(unittest.TestCase):
 
     def test___str___DataNode(self):
         """
-        TODO
+        Test __str__ function of DataNode.
         """
-        pass
+
+        t1 = DataNode("1")
+        self.assertEqual(str(t1), "1")
 
 
 class TestTagNode(unittest.TestCase):
-    # TODO
-    pass
+
+    def test_simple_TagNode(self):
+        """
+        Test a simple TagNode with only a value attribute
+        """
+
+        tag = "1"
+        result = TagNode(tag)
+
+        self.assertEqual(result.data, tag)
+        self.assertEqual(result.children, None)
+
+    def test_complex_TagNode1(self):
+        """
+        Test a complex TagNode with all possible attributes
+
+        Single child
+        """
+
+        data = ('1', DataNode('child'))
+
+        result = TagNode(*data)
+
+        self.assertEqual(result.data, data[0])
+        self.assertEqual(result.children, [data[1]])
+        self.assertEqual(result.height(), 2)
+
+    def test_is_element_TagNode(self):
+        """
+        Test is_element function of TagNode.
+        """
+        t1 = TagNode(1)
+        self.assertEqual(t1.is_element(), False)
+
+    def test_is_tag_TagNode(self):
+        """
+        Test is_tag function of TagNode.
+        """
+        t1 = TagNode(1)
+        self.assertEqual(t1.is_tag(), True)
+
+    def test_is_attribute_TagNode(self):
+        """
+        Test is_attribute function of TagNode.
+        """
+        t1 = TagNode(1)
+        self.assertEqual(t1.is_attribute(), False)
+
+    def test_valid_other_functions_TagNode(self):
+        """
+        Test if TagNode has same functions as DataNode.
+
+        Functionallity is tested in TestDataNode
+        """
+
+        t1 = TagNode(1)
+
+        # add()
+        t1.add(DataNode('2'))
+        self.assertIsNotNone(t1.children)
+
+        # height()
+        self.assertIsNotNone(t1.height())
+
+        # is_leaf()
+        self.assertIsNotNone(t1.is_leaf())
+
+        # remove_children()
+        self.assertIsNotNone(t1.remove_children())
+
+        # minimize_height()
+        t1.minimize_height()
+
+        # generate_string_representation()
+        self.assertIsNotNone(t1.generate_string_representation())
+
+        # __str__()
+        self.assertIsNotNone(str(t1))
 
 
 class TestAttributeNode(unittest.TestCase):
-    # TODO
-    pass
 
+    def test_simple_AttributeNode(self):
+        """
+        Test a simple AttributeNode with only a value attribute
+        """
+
+        key, value = "1", "2"
+        result = AttributeNode(key, value)
+
+        self.assertEqual(result.key, key)
+        self.assertEqual(result.data, value)
+        self.assertEqual(result.children, None)
+
+    def test_complex_AttributeNode1(self):
+        """
+        Test a complex AttributeNode with all possible attributes
+
+        Single child
+        """
+
+        data = ("1", "2", DataNode('child'))
+
+        result = AttributeNode(*data)
+
+        self.assertEqual(result.key, data[0])
+        self.assertEqual(result.data, data[1])
+        self.assertEqual(result.children, [data[2]])
+        self.assertEqual(result.height(), 2)
+
+    def test_complex_AttributeNode2(self):
+        """
+        Test a complex AttributeNode with all possible attributes
+
+        No String key and value
+        """
+
+        data = (1, 2, DataNode('child'))
+
+        result = AttributeNode(*data)
+
+        self.assertEqual(result.key, str(data[0]))
+        self.assertEqual(result.data, str(data[1]))
+        self.assertEqual(result.children, [data[2]])
+        self.assertEqual(result.height(), 2)
+
+    def test_is_element_AttributeNode(self):
+        """
+        Test is_element function of AttributeNode.
+        """
+        t1 = AttributeNode("1", "2")
+        self.assertEqual(t1.is_element(), False)
+
+    def test_is_tag_AttributeNode(self):
+        """
+        Test is_tag function of AttributeNode.
+        """
+        t1 = AttributeNode("1", "2")
+        self.assertEqual(t1.is_tag(), False)
+
+    def test_is_attribute_AttributeNode(self):
+        """
+        Test is_attribute function of AttributeNode.
+        """
+        t1 = AttributeNode("1", "2")
+        self.assertEqual(t1.is_attribute(), True)
+
+    def test_valid_other_functions_AttributeNode(self):
+        """
+        Test if AttributeNode has same functions as DataNode.
+
+        Functionallity is tested in TestDataNode
+        """
+
+        t1 = AttributeNode("1", "2")
+
+        # add()
+        t1.add(DataNode('2'))
+        self.assertIsNotNone(t1.children)
+
+        # height()
+        self.assertIsNotNone(t1.height())
+
+        # is_leaf()
+        self.assertIsNotNone(t1.is_leaf())
+
+        # remove_children()
+        self.assertIsNotNone(t1.remove_children())
+
+        # minimize_height()
+        t1.minimize_height()
+
+        # generate_string_representation()
+        self.assertIsNotNone(t1.generate_string_representation())
+
+        # __str__()
+        self.assertIsNotNone(str(t1))
+
+    def test___str___AttributeNode(self):
+        """
+        Test __str__ function of AttributeNode.
+        """
+
+        t1 = AttributeNode("1", "2")
+        self.assertEqual(str(t1), '1="2"')
 
 class TestDataTree(unittest.TestCase):
 
