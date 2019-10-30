@@ -426,6 +426,7 @@ class TestAttributeNode(unittest.TestCase):
         t1 = AttributeNode("1", "2")
         self.assertEqual(str(t1), '1="2"')
 
+
 class TestDataTree(unittest.TestCase):
 
     def test_root_DataTree(self):

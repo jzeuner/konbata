@@ -38,13 +38,17 @@ konbata.py [-h] [-sa] [-sh] [-g] [-del DELIMITER] [-opt OPTIONS]
 ## Documentation
 To be added.
 
+[Wiki](https://github.com/jzeuner/konbata/wiki)
+
 ## Discussions and Development
 Feel free to contact me (e.g via Github) or to contribute in the project.
 
 ## Contribute to Konbata
 All kind of contributions are welcome!
 
-A detailed guide, has to be added. For right now, feel free to use the Github features to contribute.
+[Contribution Guideline](https://github.com/jzeuner/konbata/wiki/Contribution-Guideline)
+
+A detailed guide, has to be added.
 
 ## Example
 ```python
