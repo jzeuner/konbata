@@ -3,6 +3,7 @@
 """
 
 import unittest
+import os
 from io import StringIO
 
 from konbata import Konbata
@@ -11,6 +12,7 @@ from Formats.Format import Format
 from Formats.FormatLoader import checkTypes, getFormats
 from Formats.csv_format import csv_toTree, csv_fromTree
 from Formats.txt_format import txt_toTree, txt_fromTree
+from Formats.xlsx_format import xlsx_toTree, xlsx_fromTree
 
 # Constants
 PATH_INPUT_FILES = "./Tests/test_files/"
@@ -702,10 +704,6 @@ class TestTxtFormat(unittest.TestCase):
         Test the DataTree to txt function.
         """
 
-        """
-        Test the DataTree to csv function.
-        """
-
         # Prepare DataTree
         row0 = DataNode('Row0')
         row1 = DataNode('Row1')
@@ -742,12 +740,63 @@ class TestXmlFormat(unittest.TestCase):
 
 
 class TestXlsxFormat(unittest.TestCase):
-    # TODO
-    pass
+
+    def test_xlsx_toTree(self):
+        """
+        Test the xlsx to DataTree function.
+        """
+
+        tree = xlsx_toTree(PATH_INPUT_FILES + 'input_test.xlsx')
+
+        self.assertIsNotNone(tree)
+        self.assertEqual(tree.type, 'xlsx')
+        self.assertEqual(tree.height(), 4)
+
+        self.assertIsNotNone(tree.root.children)
+
+        for child in tree.root.children:
+            self.assertIsNotNone(child.children)
+            self.assertEqual(child.height(), 3)
+            self.assertEqual(len(child.children), 4)
+
+    def test_xlsx_fromTree(self):
+        """
+        Test the DataTree to xlsx function.
+        """
+
+        # TODO: Test for right output
+
+        # Prepare DataTree
+        row0 = DataNode('Row0', children=[DataNode('Col1'), DataNode('Col2'),
+                                          DataNode('Col3')])
+        row1 = DataNode('Row1', children=[DataNode('Row11'), DataNode('Row12'),
+                                          DataNode('Row13')])
+        row2 = DataNode('Row2', children=[DataNode('Row21'), DataNode('Row22'),
+                                          DataNode('Row23')])
+        row3 = DataNode('Row3', children=[DataNode('Row31'), DataNode('Row32'),
+                                          DataNode('Row33')])
+        row4 = DataNode('Row4', children=[DataNode('Row41'), DataNode('Row42'),
+                                          DataNode('Row43')])
+
+        tree = DataTree(type='xlsx')
+        tree.root.add(row0)
+        tree.root.add(row1)
+        tree.root.add(row2)
+        tree.root.add(row3)
+        tree.root.add(row4)
+
+        f= open(PATH_INPUT_FILES + 'output_test.xlsx',"w+")
+        f.close()
+        xlsx_fromTree(tree, PATH_INPUT_FILES + 'output_test.xlsx')
+        os.remove(PATH_INPUT_FILES + 'output_test.xlsx')
+        # Run function
+        try:
+            pass
+        finally:
+            pass
 
 
 class TestKonbata(unittest.TestCase):
-    # TODO
 
     def test_simple_Konbata(self):
         """

@@ -107,7 +107,7 @@ class Format:
             delimiter = self.delimiters[0]
 
         if not self.pre_open:
-            self.parser(path, delimiter)
+            self.parser(content, path, delimiter)
             return
 
         out_file = open(path, 'w', newline='')
