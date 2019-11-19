@@ -63,7 +63,6 @@ def xlsx_fromTree(tree, file_name, options=None):
     """
 
     if not isinstance(tree, DataTree):
-        print(tree)
         raise TypeError('tree must be type of DataTree and not ', type(tree))
 
     if tree.type != 'xlsx' or tree.height() != 4:

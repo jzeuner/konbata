@@ -785,15 +785,12 @@ class TestXlsxFormat(unittest.TestCase):
         tree.root.add(row3)
         tree.root.add(row4)
 
-        f= open(PATH_INPUT_FILES + 'output_test.xlsx',"w+")
+        f = open(PATH_INPUT_FILES + 'output_test.xlsx', "w+")
         f.close()
+
         xlsx_fromTree(tree, PATH_INPUT_FILES + 'output_test.xlsx')
+
         os.remove(PATH_INPUT_FILES + 'output_test.xlsx')
-        # Run function
-        try:
-            pass
-        finally:
-            pass
 
 
 class TestKonbata(unittest.TestCase):
