@@ -13,30 +13,30 @@
 <br>
 
 <div align="center">
-	<table class="tg">
-  		<tr>
-    		<th>Flake8</th>
-    		<th>Unittest</th>
-    		<th>Code-Coverage</th>
-  		</tr>
-  		<tr>
-    		<td>
-    			<a href="https://travis-ci.org/jzeuner/konbata">
-    				<img src="https://travis-matrix-badges.herokuapp.com/repos/jzeuner/konbata/branches/master/1" alt="Flake8 status" />
-  				</a>
-    		</td>
-    		<td>
-    			<a href="https://travis-ci.org/jzeuner/konbata">
-    				<img src="https://travis-matrix-badges.herokuapp.com/repos/jzeuner/konbata/branches/master/2" alt="Flake8 status" />
-  				</a>
-    		</td>
-    		<td>
-    			<a href="https://travis-ci.org/jzeuner/konbata">
-    				<img src="https://travis-matrix-badges.herokuapp.com/repos/jzeuner/konbata/branches/master/3" alt="Flake8 status" />
-  				</a>
-    		</td>
-  		</tr>
-	</table>
+  <table display="inline-table">
+    <tr>
+      <th>Flake8</th>
+      <th>Unittest</th>
+      <th>Code-Coverage</th>
+    </tr>
+    <tr>
+      <td>
+        <a href="https://travis-ci.org/jzeuner/konbata">
+          <img src="https://travis-matrix-badges.herokuapp.com/repos/jzeuner/konbata/branches/master/1" alt="Flake8 status" />
+        </a>
+      </td>
+      <td>
+        <a href="https://travis-ci.org/jzeuner/konbata">
+          <img src="https://travis-matrix-badges.herokuapp.com/repos/jzeuner/konbata/branches/master/2" alt="Unittest status" />
+        </a>
+      </td>
+      <td>
+        <a href="https://travis-ci.org/jzeuner/konbata">
+          <img src="https://travis-matrix-badges.herokuapp.com/repos/jzeuner/konbata/branches/master/3" alt="Code-coverage status" />
+        </a>
+      </td>
+    </tr>
+  </table>
 </div>
 
 <br>
