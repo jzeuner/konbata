@@ -1,15 +1,46 @@
-# <img alt="konbata" src="https://github.com/jzeuner/konbata_images/blob/master/logo.png">
+<div align="center">
+  <h1>Konbata</h1>
+</div>
 
-| Flake8            | Unittest          | Code-Coverage     |
-|-------------------|-------------------|-------------------|
-| [![Flake8][1]][5] | [![Unittest][2]][5] | [![Code-Coverage][3]][5] |
+<div align="center">
+  <strong>Python File Converter for hierarchical data</strong>
+</div>
 
-[1]: https://travis-matrix-badges.herokuapp.com/repos/jzeuner/konbata/branches/master/1
-[2]: https://travis-matrix-badges.herokuapp.com/repos/jzeuner/konbata/branches/master/2
-[3]: https://travis-matrix-badges.herokuapp.com/repos/jzeuner/konbata/branches/master/3
-[5]: https://travis-ci.org/jzeuner/konbata
+<div align="center">
+  A Python file converter for hierarchical data delivering simple, flexible and dynamic experiences.
+</div>
 
----
+<br>
+
+<div align="center">
+	<table class="tg">
+  		<tr>
+    		<th>Flake8</th>
+    		<th>Unittest</th>
+    		<th>Code-Coverage</th>
+  		</tr>
+  		<tr>
+    		<td>
+    			<a href="https://travis-ci.org/jzeuner/konbata">
+    				<img src="https://travis-matrix-badges.herokuapp.com/repos/jzeuner/konbata/branches/master/1" alt="Flake8 status" />
+  				</a>
+    		</td>
+    		<td>
+    			<a href="https://travis-ci.org/jzeuner/konbata">
+    				<img src="https://travis-matrix-badges.herokuapp.com/repos/jzeuner/konbata/branches/master/2" alt="Flake8 status" />
+  				</a>
+    		</td>
+    		<td>
+    			<a href="https://travis-ci.org/jzeuner/konbata">
+    				<img src="https://travis-matrix-badges.herokuapp.com/repos/jzeuner/konbata/branches/master/3" alt="Flake8 status" />
+  				</a>
+    		</td>
+  		</tr>
+	</table>
+</div>
+
+<br>
+
 #### What is it?
 Konbata is a python libary, that allows you to covert a file.
 It formats the content of the input file into the output format, by using an internal data structure.
