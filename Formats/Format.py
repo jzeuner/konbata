@@ -70,11 +70,11 @@ class Format:
         content: DataTree
         """
 
-        if not isinstance(delimiter, str):
-            raise TypeError('delimiter must be a str')
-
         if delimiter is None:
             delimiter = self.delimiters[0]
+
+        if not isinstance(delimiter, str):
+            raise TypeError('delimiter must be a str')
 
         if not self.pre_open:
             return self.loader(path, delimiter)
@@ -100,11 +100,11 @@ class Format:
             If delimiter is none the first format delimiter is used
         """
 
-        if not isinstance(delimiter, str):
-            raise TypeError('delimiter must be a str')
-
         if delimiter is None:
             delimiter = self.delimiters[0]
+
+        if not isinstance(delimiter, str):
+            raise TypeError('delimiter must be a str')
 
         if not self.pre_open:
             self.parser(content, path, delimiter)

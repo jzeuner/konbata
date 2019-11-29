@@ -26,8 +26,14 @@
 import argparse
 import sys
 import os
-from Formats.FormatLoader import getFormats
 
+from Formats.csv_format import csv_format
+from Formats.txt_format import txt_format
+from Formats.xlsx_format import xlsx_format
+
+TYPES = {'.csv': csv_format,
+         '.txt': txt_format,
+         '.xlsx': xlsx_format}
 
 class Konbata:
     """
@@ -54,7 +60,7 @@ class Konbata:
         """
 
         # Uses the Format class to get and check the data types of the files
-        formats = getFormats([in_type, out_type])
+        formats = self.get_formats([in_type, out_type])
 
         self.input_type = formats[0]
         self.output_type = formats[1]
@@ -108,6 +114,42 @@ class Konbata:
         """
 
         return self.content
+
+    def check_types(self, type_names=None):
+        """
+        Cheks if a list of types is supported by the tool.
+        If not supported it raises a TypeError exception.
+
+        Parameters
+        ----------
+        type_names: list
+        """
+
+        for type_name in type_names:
+            if type_name not in TYPES:
+                raise TypeError('Type %s not supported.' % type_name)
+
+    def get_formats(self, type_names=None):
+        """
+        Generates a list of formats to a list of type names.
+
+        Parameters
+        ----------
+        type_names: list
+            each type is a str and looks like this '.type'
+
+        Returns
+        -------
+        types: list
+            list of Type Objects
+        """
+
+        if not isinstance(type_names, list):
+            raise TypeError('type_names must be a list')
+
+        self.check_types(type_names)
+
+        return [TYPES[type_name] for type_name in type_names]
 
 
 def konbata(input_filename, output_filename,
