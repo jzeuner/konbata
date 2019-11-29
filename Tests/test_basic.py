@@ -829,24 +829,21 @@ class TestKonbata(unittest.TestCase):
         """
         pass
 
-    def test_save_Konbata(self):
-        """
-        TODO find a good way to test this
-        """
-        pass
-
     def test_show_Konbata(self):
         """
+        TODO
         """
         pass
 
     def test_get_Konbata(self):
         """
+        TODO
         """
         pass
 
     def test_konbata(self):
         """
+        TODO
         """
         pass
 
