@@ -38,7 +38,7 @@ def csv_toTree(file, delimiter, ignore_index=True, options=None):
     # TODO add option column or row store
     csv_reader = csv.reader(file, delimiter=delimiter)
 
-    tree = DataTree(type='csv')
+    tree = DataTree(tree_type='csv')
 
     i = 0
     for row in csv_reader:
@@ -67,7 +67,7 @@ def csv_fromTree(tree, file, options=None):
     if not isinstance(tree, DataTree):
         raise TypeError('tree must be type of DataTree')
 
-    if tree.type != 'csv' or tree.height() != 3:
+    if tree.tree_type != 'csv' or tree.height() != 3:
         # Height of tree needs to be flatten or need to be increased
         if tree.height() > 3:
             tree.minimize_height(tree.height()-3)

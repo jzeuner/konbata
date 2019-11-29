@@ -30,7 +30,7 @@ def xlsx_toTree(file_name, options=None):
 
     xlsx_wb = openpyxl.load_workbook(filename=file_name)
 
-    tree = DataTree(type='xlsx')
+    tree = DataTree(tree_type='xlsx')
 
     # For each sheet create a node
     for sheet_name in xlsx_wb.sheetnames:
@@ -65,7 +65,7 @@ def xlsx_fromTree(tree, file_name, options=None):
     if not isinstance(tree, DataTree):
         raise TypeError('tree must be type of DataTree and not ', type(tree))
 
-    if tree.type != 'xlsx' or tree.height() != 4:
+    if tree.tree_type != 'xlsx' or tree.height() != 4:
         # Height of tree needs to be flatten or need to be increased
         if tree.height() > 4:
             tree.minimize_height(tree.height()-4)

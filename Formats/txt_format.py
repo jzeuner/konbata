@@ -22,7 +22,7 @@ def txt_toTree(file, delimiter=None, options=None):
     tree: DataTree
     """
 
-    tree = DataTree(type='txt')
+    tree = DataTree(tree_type='txt')
 
     # TODO add more options
     for row in file.readlines():
@@ -46,7 +46,7 @@ def txt_fromTree(tree, file, options=None):
     if not isinstance(tree, DataTree):
         raise TypeError('tree must be type of DataTree')
 
-    if tree.height() != 2 or tree.type != 'txt':
+    if tree.height() != 2 or tree.tree_type != 'txt':
         if tree.height() > 2:
             tree.minimize_height(tree.height()-2)
         elif tree.height() < 2:

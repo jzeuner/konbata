@@ -84,8 +84,8 @@ class DataNode:
 
         if self.children is None:
             return 1
-        else:
-            return 1 + max([x.height() for x in self.children])
+
+        return 1 + max([x.height() for x in self.children])
 
     def is_leaf(self):
         """
@@ -288,17 +288,17 @@ class DataTree:
     Each tree has a root DataNode, that is the entry point of the trees data.
     """
 
-    def __init__(self, type=None):
+    def __init__(self, tree_type=None):
         """
         Initiates the current DataTree.
 
         Parameters
         ----------
-        type: str
+        tree_type: str
         """
 
         self.root = DataNode('FileRoot')
-        self.type = type
+        self.tree_type = tree_type
 
     def height(self):
         """
