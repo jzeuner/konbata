@@ -12,9 +12,17 @@
 
 <br>
 
-[![Flake8](https://github.com/jzeuner/konbata/workflows/Flake8/badge.svg)][https://github.com/jzeuner/konbata/actions]
-[![Unittest](https://github.com/jzeuner/konbata/workflows/TestCases/badge.svg)][https://github.com/jzeuner/konbata/actions]
-[![CodeCoverage](https://github.com/jzeuner/konbata/workflows/CodeCoverage/badge.svg)][https://github.com/jzeuner/konbata/actions]
+<div align="center">
+  <a href="https://github.com/jzeuner/konbata/actions">
+    <img src="https://github.com/jzeuner/konbata/workflows/Flake8/badge.svg" alt="Flake8 status" />
+  </a>
+  <a href="https://github.com/jzeuner/konbata/actions">
+    <img src="https://github.com/jzeuner/konbata/workflows/TestCases/badge.svg" alt="Unittest status" />
+  </a>
+  <a href="https://github.com/jzeuner/konbata/actions">
+    <img src="https://github.com/jzeuner/konbata/workflows/CodeCoverage/badge.svg" alt="Code-coverage status" />
+  </a>
+</div>
 
 <br>
 
