@@ -9,7 +9,6 @@ from io import StringIO
 from konbata import Konbata
 from Data.Data import DataNode, TagNode, AttributeNode, DataTree
 from Formats.Format import Format
-from Formats.FormatLoader import checkTypes, getFormats
 from Formats.csv_format import csv_toTree, csv_fromTree
 from Formats.txt_format import txt_toTree, txt_fromTree
 from Formats.xlsx_format import xlsx_toTree, xlsx_fromTree
@@ -449,7 +448,7 @@ class TestDataTree(unittest.TestCase):
 
         t1 = DataTree('type')
 
-        self.assertEqual(t1.type, 'type')
+        self.assertEqual(t1.tree_type, 'type')
 
         d1 = DataNode(1)
         d2 = DataNode(2)
@@ -552,48 +551,6 @@ class TestDataTree(unittest.TestCase):
 
 class TestFormats(unittest.TestCase):
 
-    def test_fail_checkFormats(self):
-        """
-        Test if error got raised for not supported or empty type name.
-        """
-
-        self.assertRaises(TypeError, lambda: checkTypes(['.qqr']))
-        self.assertRaises(TypeError, lambda: checkTypes(['.qqr', '.https']))
-
-    def test_checkFormats(self):
-        """
-        Test supported types.
-        """
-
-        try:
-            checkTypes([])
-            checkTypes(['.csv'])
-            checkTypes(['.txt'])
-            checkTypes(['.csv', '.txt'])
-        except TypeError:
-            self.fail()
-
-    def test_fail_getFormats(self):
-        """
-        Test the getFormats function with not supported types.
-        """
-
-        self.assertRaises(TypeError, lambda: getFormats(['.qqr']))
-        self.assertRaises(TypeError, lambda: getFormats(['.qqr', '.https']))
-
-    def test_getFormats(self):
-        """
-        Test the getFormats function with supported types.
-        """
-        result = getFormats(['.txt', '.csv'])
-
-        self.assertEqual(type(result), type([]))
-        self.assertEqual(len(result), 2)
-
-        for r in result:
-            self.assertIsNotNone(r.loader)
-            self.assertIsNotNone(r.parser)
-
     def test_Format(self):
         """
         Test wrong use of Format creation and one creation with two functions.
@@ -627,7 +584,7 @@ class TestCsvFormat(unittest.TestCase):
         inputfile.close()
 
         self.assertIsNotNone(tree)
-        self.assertEqual(tree.type, 'csv')
+        self.assertEqual(tree.tree_type, 'csv')
         self.assertEqual(tree.height(), 3)
 
         self.assertIsNotNone(tree.root.children)
@@ -654,7 +611,7 @@ class TestCsvFormat(unittest.TestCase):
         row4 = DataNode('Row4', children=[DataNode('Row41'), DataNode('Row42'),
                                           DataNode('Row43')])
 
-        tree = DataTree(type='csv')
+        tree = DataTree(tree_type='csv')
         tree.root.add(row0)
         tree.root.add(row1)
         tree.root.add(row2)
@@ -690,7 +647,7 @@ class TestTxtFormat(unittest.TestCase):
         inputfile.close()
 
         self.assertIsNotNone(tree)
-        self.assertEqual(tree.type, 'txt')
+        self.assertEqual(tree.tree_type, 'txt')
         self.assertEqual(tree.height(), 2)
 
         self.assertIsNotNone(tree.root.children)
@@ -711,7 +668,7 @@ class TestTxtFormat(unittest.TestCase):
         row3 = DataNode('Row3')
         row4 = DataNode('Row4')
 
-        tree = DataTree(type='txt')
+        tree = DataTree(tree_type='txt')
         tree.root.add(row0)
         tree.root.add(row1)
         tree.root.add(row2)
@@ -749,7 +706,7 @@ class TestXlsxFormat(unittest.TestCase):
         tree = xlsx_toTree(PATH_INPUT_FILES + 'input_test.xlsx')
 
         self.assertIsNotNone(tree)
-        self.assertEqual(tree.type, 'xlsx')
+        self.assertEqual(tree.tree_type, 'xlsx')
         self.assertEqual(tree.height(), 4)
 
         self.assertIsNotNone(tree.root.children)
@@ -778,7 +735,7 @@ class TestXlsxFormat(unittest.TestCase):
         row4 = DataNode('Row4', children=[DataNode('Row41'), DataNode('Row42'),
                                           DataNode('Row43')])
 
-        tree = DataTree(type='xlsx')
+        tree = DataTree(tree_type='xlsx')
         tree.root.add(row0)
         tree.root.add(row1)
         tree.root.add(row2)
@@ -822,6 +779,57 @@ class TestKonbata(unittest.TestCase):
         self.assertEqual(result.delimiter, ";")
         self.assertEqual(result.options, ['1', '2'])
         self.assertEqual(result.content, None)
+
+    def test_fail_checkFormats(self):
+        """
+        Test if error got raised for not supported or empty type name.
+        """
+
+        k = Konbata('.csv', '.txt', ";", ['1', '2'])
+
+        self.assertRaises(TypeError, lambda: k.check_types(['.qqr']))
+        self.assertRaises(TypeError, lambda: k.check_types(['.qqr', '.https']))
+
+    def test_checkFormats(self):
+        """
+        Test supported types.
+        """
+
+        k = Konbata('.csv', '.txt', ";", ['1', '2'])
+
+        try:
+            k.check_types([])
+            k.check_types(['.csv'])
+            k.check_types(['.txt'])
+            k.check_types(['.csv', '.txt'])
+        except TypeError:
+            self.fail()
+
+    def test_fail_get_formats(self):
+        """
+        Test the get_formats function with not supported types.
+        """
+
+        k = Konbata('.csv', '.txt', ";", ['1', '2'])
+
+        self.assertRaises(TypeError, lambda: k.get_formats(['.qqr']))
+        self.assertRaises(TypeError, lambda: k.get_formats(['.qqr', '.https']))
+
+    def test_get_formats(self):
+        """
+        Test the get_formats function with supported types.
+        """
+
+        k = Konbata('.csv', '.txt', ";", ['1', '2'])
+
+        result = k.get_formats(['.txt', '.csv'])
+
+        self.assertEqual(type(result), type([]))
+        self.assertEqual(len(result), 2)
+
+        for r in result:
+            self.assertIsNotNone(r.loader)
+            self.assertIsNotNone(r.parser)
 
     def test_format_Konbata(self):
         """

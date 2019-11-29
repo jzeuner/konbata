@@ -31,9 +31,11 @@ from Formats.csv_format import csv_format
 from Formats.txt_format import txt_format
 from Formats.xlsx_format import xlsx_format
 
+
 TYPES = {'.csv': csv_format,
          '.txt': txt_format,
          '.xlsx': xlsx_format}
+
 
 class Konbata:
     """
