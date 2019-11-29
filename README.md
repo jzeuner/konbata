@@ -12,22 +12,9 @@
 
 <br>
 
-<div align="left">
-  <a href="https://travis-ci.org/jzeuner/konbata">
-    <img src="https://travis-matrix-badges.herokuapp.com/repos/jzeuner/konbata/branches/master/1" alt="Flake8 status" />
-  </a>
-   <strong> Flake8</strong>
-  <br>
-  <a href="https://travis-ci.org/jzeuner/konbata">
-    <img src="https://travis-matrix-badges.herokuapp.com/repos/jzeuner/konbata/branches/master/2" alt="Unittest status" />
-  </a>
-  <strong> Unittest</strong>
-  <br>
-  <a href="https://travis-ci.org/jzeuner/konbata">
-    <img src="https://travis-matrix-badges.herokuapp.com/repos/jzeuner/konbata/branches/master/3" alt="Code-coverage status" />
-  </a>
-  <strong> Code-Coverage</strong>
-</div>
+[![Flake8](https://github.com/jzeuner/konbata/workflows/Flake8/badge.svg)][https://github.com/jzeuner/konbata/actions]
+[![Unittest](https://github.com/jzeuner/konbata/workflows/TestCases/badge.svg)][https://github.com/jzeuner/konbata/actions]
+[![CodeCoverage](https://github.com/jzeuner/konbata/workflows/CodeCoverage/badge.svg)][https://github.com/jzeuner/konbata/actions]
 
 <br>
 
