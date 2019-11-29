@@ -92,3 +92,14 @@ A detailed guide, has to be added.
 ```console
 foo@bar:~$ python konbata.py /test/inputfile.csv /test/outputfile.xlsx
 ```
+
+## Supported Formats
+| Format | Status | Basic Convert | Extended Convert  |
+|--------|--------|---------------|-------------------|
+| txt    | Active | True          | False             |
+| csv    | Active | True          | False             |
+| xlsx   | Active | True          | False             |
+| xml    | -      | -             | -                 |
+| json   | -      | -             | -                 |
+| YAML   | -      | -             | -                 |
+| ...    | -      | -             | -                 |
