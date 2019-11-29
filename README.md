@@ -12,31 +12,21 @@
 
 <br>
 
-<div align="center">
-  <table display="inline-table">
-    <tr>
-      <th>Flake8</th>
-      <th>Unittest</th>
-      <th>Code-Coverage</th>
-    </tr>
-    <tr>
-      <td>
-        <a href="https://travis-ci.org/jzeuner/konbata">
-          <img src="https://travis-matrix-badges.herokuapp.com/repos/jzeuner/konbata/branches/master/1" alt="Flake8 status" />
-        </a>
-      </td>
-      <td>
-        <a href="https://travis-ci.org/jzeuner/konbata">
-          <img src="https://travis-matrix-badges.herokuapp.com/repos/jzeuner/konbata/branches/master/2" alt="Unittest status" />
-        </a>
-      </td>
-      <td>
-        <a href="https://travis-ci.org/jzeuner/konbata">
-          <img src="https://travis-matrix-badges.herokuapp.com/repos/jzeuner/konbata/branches/master/3" alt="Code-coverage status" />
-        </a>
-      </td>
-    </tr>
-  </table>
+<div align="left">
+  <a href="https://travis-ci.org/jzeuner/konbata">
+    <img src="https://travis-matrix-badges.herokuapp.com/repos/jzeuner/konbata/branches/master/1" alt="Flake8 status" />
+  </a>
+   <strong> Flake8</strong>
+  <br>
+  <a href="https://travis-ci.org/jzeuner/konbata">
+    <img src="https://travis-matrix-badges.herokuapp.com/repos/jzeuner/konbata/branches/master/2" alt="Unittest status" />
+  </a>
+  <strong> Unittest</strong>
+  <br>
+  <a href="https://travis-ci.org/jzeuner/konbata">
+    <img src="https://travis-matrix-badges.herokuapp.com/repos/jzeuner/konbata/branches/master/3" alt="Code-coverage status" />
+  </a>
+  <strong> Code-Coverage</strong>
 </div>
 
 <br>
@@ -59,8 +49,21 @@ xml, csv, json, html, txt, ...
 
 ## Usage
 ```
-konbata.py [-h] [-sa] [-sh] [-g] [-del DELIMITER] [-opt OPTIONS]
-           input_file output_file
+konbata.py [-h] [-sh] [-g] [-del DELIMITER] [-opt OPTIONS]
+                input_file output_file
+
+positional arguments:
+  input_file            Path of input file
+  output_file           Path of output file
+
+optional arguments:
+  -h, --help            show this help message and exit
+  -sh, --show           Show output file
+  -g, --get             Get output file
+  -del DELIMITER, --delimiter DELIMITER
+                        Set input delimiter: -del ';'
+  -opt OPTIONS, --options OPTIONS
+                        Additional Options
 ```
 
 ## License
@@ -84,4 +87,8 @@ A detailed guide, has to be added.
 ## Example
 ```python
 # TODO
+```
+
+```console
+foo@bar:~$ python konbata.py /test/inputfile.csv /test/outputfile.xlsx
 ```
