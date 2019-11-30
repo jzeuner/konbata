@@ -7,9 +7,9 @@
     https://openpyxl.readthedocs.io/en/stable/
 """
 
-from Data.Data import DataNode, DataTree
+from konbata.Data.Data import DataNode, DataTree
 import openpyxl
-from Formats.Format import Format
+from konbata.Formats.Format import Format
 
 
 def xlsx_toTree(file_name, options=None):

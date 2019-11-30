@@ -6,12 +6,12 @@ import unittest
 import os
 from io import StringIO
 
-from konbata import Konbata
-from Data.Data import DataNode, TagNode, AttributeNode, DataTree
-from Formats.Format import Format
-from Formats.csv_format import csv_toTree, csv_fromTree
-from Formats.txt_format import txt_toTree, txt_fromTree
-from Formats.xlsx_format import xlsx_toTree, xlsx_fromTree
+from konbata.konbata import Konbata
+from konbata.Data.Data import DataNode, TagNode, AttributeNode, DataTree
+from konbata.Formats.Format import Format
+from konbata.Formats.csv_format import csv_toTree, csv_fromTree
+from konbata.Formats.txt_format import txt_toTree, txt_fromTree
+from konbata.Formats.xlsx_format import xlsx_toTree, xlsx_fromTree
 
 # Constants
 PATH_INPUT_FILES = "./Tests/test_files/"

@@ -2,8 +2,8 @@
     Loader and Parser for the txt format.
 """
 
-from Data.Data import DataNode, DataTree
-from Formats.Format import Format
+from konbata.Data.Data import DataNode, DataTree
+from konbata.Formats.Format import Format
 
 
 def txt_toTree(file, delimiter=None, options=None):

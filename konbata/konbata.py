@@ -27,9 +27,9 @@ import argparse
 import sys
 import os
 
-from Formats.csv_format import csv_format
-from Formats.txt_format import txt_format
-from Formats.xlsx_format import xlsx_format
+from konbata.Formats.csv_format import csv_format
+from konbata.Formats.txt_format import txt_format
+from konbata.Formats.xlsx_format import xlsx_format
 
 
 TYPES = {'.csv': csv_format,

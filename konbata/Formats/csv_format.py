@@ -14,8 +14,8 @@
 """
 
 import csv
-from Data.Data import DataNode, DataTree
-from Formats.Format import Format
+from konbata.Data.Data import DataNode, DataTree
+from konbata.Formats.Format import Format
 
 
 def csv_toTree(file, delimiter, ignore_index=True, options=None):

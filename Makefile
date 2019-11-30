@@ -13,6 +13,6 @@ run-tests:
 
 run-code-coverage:
 	coverage run --source='.' -m unittest Tests/test_basic.py -b
-	
+
 run-display-code-coverage:
 	coverage report -m
