@@ -42,6 +42,15 @@ This is where konbata comes in place, it serves as interface between tools and f
 Just a list of some file formats:
 xml, csv, json, html, txt, ...
 
+## Where to get it?
+The source code is available on GitHub: [https://github.com/jzeuner/konbata](https://github.com/jzeuner/konbata)
+
+You can install the latest version with pip.
+```console
+foo@bar:~$ pip install konbata
+```
+
+
 ## Usage
 ```
 konbata.py [-h] [-sh] [-g] [-del DELIMITER] [-opt OPTIONS]

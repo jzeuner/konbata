@@ -13,3 +13,9 @@ todos.txt
 
 # Coverage
 .coverage
+
+# Build
+build/
+dist/
+konbata.egg-info/
+.pypirc
