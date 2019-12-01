@@ -6,7 +6,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="konbata",
-    version="0.0.1",
+    version="0.0.2",
     author="Jonas Zeuner",
     author_email="jzeuner.oss@gmail.com",
     description="Python File Converter for hierarchical data",
