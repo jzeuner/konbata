@@ -25,8 +25,14 @@ def txt_toTree(file, delimiter=None, options=None):
     tree = DataTree(tree_type='txt')
 
     # TODO add more options
+    # TODO add column or row storage
+
+    col0 = DataNode('')
+
     for row in file.readlines():
-        tree.root.add(DataNode(row))
+        col0.add(DataNode(row))
+
+    tree.root.add(col0)
 
     return tree
 
@@ -46,15 +52,8 @@ def txt_fromTree(tree, file, options=None):
     if not isinstance(tree, DataTree):
         raise TypeError('tree must be type of DataTree')
 
-    if tree.height() != 2 or tree.tree_type != 'txt':
-        if tree.height() > 2:
-            tree.minimize_height(tree.height()-2)
-        elif tree.height() < 2:
-            tree.increase_height(2-tree.height())
-
-    for row_node in tree.root.children:
-        file.write(row_node.data)
-        file.write('\n')
+    output = tree.generate_string_representation()
+    file.writelines(output)
 
 
 txt_format = Format('txt', [';', ','], txt_toTree, txt_fromTree)

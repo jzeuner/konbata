@@ -1,10 +1,11 @@
 import setuptools
 
+
 with open("README.md", "r") as fh:
     long_description = fh.read()
 
 setuptools.setup(
-    name="konbata", # Replace with your own username
+    name="konbata",
     version="0.0.1",
     author="Jonas Zeuner",
     author_email="jzeuner.oss@gmail.com",

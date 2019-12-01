@@ -648,13 +648,13 @@ class TestTxtFormat(unittest.TestCase):
 
         self.assertIsNotNone(tree)
         self.assertEqual(tree.tree_type, 'txt')
-        self.assertEqual(tree.height(), 2)
+        self.assertEqual(tree.height(), 3)
 
         self.assertIsNotNone(tree.root.children)
 
         for child in tree.root.children:
             self.assertIsNotNone(child.data)
-            self.assertEqual(child.height(), 1)
+            self.assertEqual(child.height(), 2)
 
     def test_txt_fromTree(self):
         """
@@ -662,6 +662,7 @@ class TestTxtFormat(unittest.TestCase):
         """
 
         # Prepare DataTree
+        col0 = DataNode('')
         row0 = DataNode('Row0')
         row1 = DataNode('Row1')
         row2 = DataNode('Row2')
@@ -669,11 +670,14 @@ class TestTxtFormat(unittest.TestCase):
         row4 = DataNode('Row4')
 
         tree = DataTree(tree_type='txt')
-        tree.root.add(row0)
-        tree.root.add(row1)
-        tree.root.add(row2)
-        tree.root.add(row3)
-        tree.root.add(row4)
+
+        col0.add(row0)
+        col0.add(row1)
+        col0.add(row2)
+        col0.add(row3)
+        col0.add(row4)
+
+        tree.root.add(col0)
 
         # Run function
         outfile = StringIO()
@@ -683,12 +687,7 @@ class TestTxtFormat(unittest.TestCase):
         outfile.seek(0)
         content = outfile.read()
 
-        with open(PATH_INPUT_FILES + 'input_test.txt', 'r') as inputfile:
-            real_content = inputfile.readlines()
-
-        inputfile.close()
-
-        self.assertEqual(content, ''.join(real_content))
+        self.assertEqual(content, tree.generate_string_representation())
 
 
 class TestXmlFormat(unittest.TestCase):
