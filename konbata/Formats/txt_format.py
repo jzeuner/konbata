@@ -1,5 +1,8 @@
 """
     Loader and Parser for the txt format.
+
+    Version: 0.01-beta
+
 """
 
 from konbata.Data.Data import DataNode, DataTree

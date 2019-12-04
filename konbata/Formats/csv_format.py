@@ -1,6 +1,8 @@
 """
     Loader and Parser for the csv format.
 
+    Version: 0.01-beta
+
     CSV files have different options (a Dialect)
     also see https://docs.python.org/3/library/csv.html#csv.Dialect
         delimiter

@@ -30,11 +30,13 @@ import os
 from konbata.Formats.csv_format import csv_format
 from konbata.Formats.txt_format import txt_format
 from konbata.Formats.xlsx_format import xlsx_format
+from konbata.Formats.xml_format import xml_format
 
 
 TYPES = {'.csv': csv_format,
          '.txt': txt_format,
-         '.xlsx': xlsx_format}
+         '.xlsx': xlsx_format,
+         '.xml': xml_format}
 
 
 class Konbata:

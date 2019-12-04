@@ -1,6 +1,8 @@
 """
     Loader and Parser for the xlsx / xlsm files.
 
+    Version: 0.01-beta
+
     This interface focusses on Excel 2010 xlsx file format.
     With the help of the openpyxl libary.
 
