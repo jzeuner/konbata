@@ -31,7 +31,7 @@ Konbata is a python libary, that allows you to covert a file.
 It formats the content of the input file into the output format, by using an internal data structure.
 
 At least, this is the goal of the project.
-It can also be used as an tool in the terminal.
+It can also be used as a tool in the terminal.
 
 #### Why does the world need this?
 Simple, there are just too many file formats (see some file formats below).
